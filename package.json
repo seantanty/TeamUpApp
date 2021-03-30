@@ -1,10 +1,13 @@
 {
   "name": "teamupapp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
   },
+  "keywords": [],
+  "author": "Yongliang Tan & Xinyi Ge",
+  "license": "MIT",
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
