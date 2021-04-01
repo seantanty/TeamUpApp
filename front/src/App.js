@@ -1,39 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import HomePage from "./Pages/HomePage.js";
+import LoginPage from "./Pages/LoginPage.js";
+import RegisterPage from "./Pages/RegisterPage.js"
+import NavigationBar from "./Components/NavigationBar.js";
+
 function App() {
-  const [names, setNames] = useState([]);
-
-  const getData = async () => {
-    try {
-      const resRaw = await fetch("/data");
-      const _names = await resRaw.json();
-      console.log(_names);
-      setNames(_names);
-    } catch {
-      console.error("something went wrong");
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const renderData = () => (
-    <div className="row">
-      {names.map((n) => (
-        <div className="col-4" key={n}>
-          Name: {n}
-        </div>
-      ))}
-    </div>
-  );
   return (
-    <div className="App">
-      <h1>My Front!</h1>
-      data:
-      {renderData()}
-    </div>
+    <Router>
+      <NavigationBar></NavigationBar>
+
+      <Switch>
+        <Route path="/login">
+          <LoginPage></LoginPage>
+        </Route>
+
+        <Route path="/register">
+          <RegisterPage></RegisterPage>
+        </Route>
+
+        <Route path="/">
+          <HomePage></HomePage>
+        </Route>
+      </Switch>
+
+    </Router>
   );
 }
 
