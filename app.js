@@ -1,17 +1,33 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
 
-var indexRouter = require("./routes/index");
+const indexRouter = require("./routes/index");
+const passport = require("passport");
 
-var app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "front/build")));
+
+require("./passportConfig")(passport);
+
+app.use(
+  require("express-session")({
+    secret: "yongliangandxinyi",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 
