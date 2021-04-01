@@ -1,12 +1,11 @@
-var express = require("express");
-var router = express.Router();
-var path = require("path");
-var passport = require("passport");
-var bcrypt = require("bcrypt");
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
+const passportLocal = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 const myDB = require("../db/MyDB.js");
 const saltRounds = 10;
 
-/* previous project code for reference */
 //middle function to check login status before show profile page
 function loggedIn(req, res, next) {
   if (req.user) {
@@ -16,54 +15,12 @@ function loggedIn(req, res, next) {
   }
 }
 
+/*
 //index GET
 router.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/../public/index.html"));
-});
-
-//register GET
-router.get("/register", function (req, res) {
-  res.sendFile(path.join(__dirname + "/../public/register.html"));
-});
-
-//check same user name before register
-router.post("/checkSameUserName", async (req, res) => {
-  try {
-    const result = await myDB.findSameUserName(req.body);
-    res.send({ same: result });
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-//register POST
-router.post("/register", async (req, res) => {
-  try {
-    const hashedPwd = await bcrypt.hash(req.body.password, saltRounds);
-    const userObj = {
-      username: req.body.username,
-      password: hashedPwd,
-      played: [],
-    };
-    const dbRes = await myDB.createUser(userObj);
-    if (dbRes == null) {
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/");
-      });
-    }
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-//login GET
-router.get("/login", function (req, res) {
-  res.sendFile(path.join(__dirname + "/../public/login.html"));
-});
+  res.sendFile(path.join(__dirname + "front/build", "index.html"));
+})
+*/
 
 //login POST
 router.post(
@@ -81,13 +38,59 @@ router.get("/logout", loggedIn, function (req, res) {
   res.redirect("/");
 });
 
+//check same user name before register
+router.post("/checkSameUserName", async (req, res, next) => {
+  try {
+    console.log("query", req.body);
+    const result = await myDB.findSameUserName(req.body);
+    res.send({ same: result });
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+//register POST
+
+router.post("/register", async (req, res) => {
+  try {
+    console.log("user register info", req.body);
+    const hashedPwd = await bcrypt.hash(req.body.password, saltRounds);
+    const userObj = {
+      username: req.body.username,
+      password: hashedPwd,
+      posted: [],
+      teamuped: []
+    };
+
+    const dbRes = await myDB.createUser(userObj);
+    if (dbRes == null) {
+      res.redirect("/register");
+    } else {
+      passport.authenticate("local")(req, res, function () {
+        res.redirect("/");
+      });
+    }
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+
 //route to get user info
 router.get("/getUser", (req, res) =>
   res.send({
     username: req.user ? req.user.username : null,
-    played: req.user ? req.user.played : null,
+    posted: req.user ? req.user.posted : null,
+    teamuped: req.user ? req.user.teamuped : null
   })
 );
+
+
+
+
+
 
 //profile GET
 router.get("/profile", loggedIn, function (req, res) {
@@ -122,6 +125,7 @@ router.get("/getPuzzles", async (req, res) => {
 
 //get board by searching puzzle id
 router.post("/searchBoard", async (req, res) => {
+  console.log("Search a puzzle", req.body);
   try {
     const puzzleId = req.body.puzzleid;
     const puzzle = await myDB.getPuzzleById(puzzleId);
@@ -147,6 +151,7 @@ router.post("/searchBoard", async (req, res) => {
 
 //route to save solved puzzle to user collection
 router.post("/saveTimeToUser", async (req, res) => {
+  console.log("save time", req.body);
   try {
     const saveTime = await myDB.saveTimeToUser(req.body);
     res.send(saveTime);
@@ -158,6 +163,7 @@ router.post("/saveTimeToUser", async (req, res) => {
 
 //route to save solved puzzle to puzzle collection
 router.post("/saveToLeaderBoard", async (req, res) => {
+  console.log("save to leaderboard", req.body);
   try {
     const saveLB = await myDB.saveToLeaderBoard(req.body);
     res.send(saveLB);
@@ -167,15 +173,16 @@ router.post("/saveToLeaderBoard", async (req, res) => {
   }
 });
 
-/* previous project code for reference */
 
-/* defualt file setup, pending delete */
-router.get("/", function (req, res) {
-  res.render("index", { title: "Express" });
-});
 
-router.get("/data", function (req, res) {
-  res.send(["Sean", "Tan", "Testing"]);
-});
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
