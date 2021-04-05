@@ -5,8 +5,103 @@ function MyDB() {
 
   // const url = process.env.MONGODB_URI;
   const url =
-    "mongodb+srv://seantan:password@cluster0.u90qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    "mongodb+srv://seantan:TanWeb5610Ge@cluster0.u90qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
   const DB_NAME = "5610Project3";
+
+  const postSchema = {
+    postId: "_id",
+    createdBy: "user._id",
+    createTime: "timestamp",
+    lastModifiedTime: "timestamp",
+    category: "type of post",
+    interested: [],
+    text: "text",
+    status: "open/closed",
+  };
+
+  console.log(postSchema);
+  //create post
+  myDB.createPost = async (post) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const postsCol = db.collection("posts");
+      //need to add a post backend verification
+      const res = await postsCol.insertOne(post);
+      return res;
+    } finally {
+      client.close();
+    }
+  };
+
+  //get posts
+  myDB.getPosts = async () => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const filesCol = db.collection("posts");
+      const files = await filesCol
+        .aggregate([
+          {
+            $project: {
+              leaderBoard: 1,
+              length: { $size: "$usersPlayed" },
+              code: 1,
+            },
+          },
+          { $sort: { length: -1 } },
+          { $limit: 3 },
+        ])
+        .toArray();
+      return files;
+    } finally {
+      client.close();
+    }
+  };
+
+  //get postById
+
+  //get postByFilter
+
+  //edit post
+  myDB.editPost = async (post) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const postsCol = db.collection("posts");
+      //edit the passed in part of the post
+      const res = await postsCol.insertOne(post);
+      return res;
+    } finally {
+      client.close();
+    }
+  };
+
+  //delete post, don't actually delete post from db
+  //instead mark post as deleted and don't show
+  myDB.deletePost = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const postsCol = db.collection("posts");
+      const userCol = db.collection("posts");
+      //remove query.postId from user's post list
+
+      //mark post as deleted
+
+      return res;
+    } finally {
+      client.close();
+    }
+  };
 
   //below code are from previous project, use as reference
 

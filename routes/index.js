@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const myDB = require("../db/MyDB.js");
 const saltRounds = 10;
+
+//testing ground, please don't delete, sean will delete when needed.
+router.get("/data", function (req, res) {
+  res.send(["Sean", "Tan", "Testing"]);
+});
+//testing ground, please don't delete, sean will delete when needed.
 
 //middle function to check login status before show profile page
 function loggedIn(req, res, next) {
@@ -60,7 +65,7 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       password: hashedPwd,
       posted: [],
-      teamuped: []
+      teamuped: [],
     };
 
     const dbRes = await myDB.createUser(userObj);
@@ -77,20 +82,14 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 //route to get user info
 router.get("/getUser", (req, res) =>
   res.send({
     username: req.user ? req.user.username : null,
     posted: req.user ? req.user.posted : null,
-    teamuped: req.user ? req.user.teamuped : null
+    teamuped: req.user ? req.user.teamuped : null,
   })
 );
-
-
-
-
-
 
 //profile GET
 router.get("/profile", loggedIn, function (req, res) {
@@ -172,17 +171,5 @@ router.post("/saveToLeaderBoard", async (req, res) => {
     res.status(400).send({ err: e });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
