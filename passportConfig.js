@@ -21,11 +21,11 @@ module.exports = function (passport) {
     })
   );
 
-  passport.serializeUser(function (user, cb) {
-    cb(null, user.id);
+  passport.serializeUser((user, cb) => {
+    cb(null, user._id);
   });
 
-  passport.deserializeUser(function (id, cb) {
+  passport.deserializeUser((id, cb) => {
     let o_id = new ObjectId(id);
     db.findUserById({ _id: o_id }, function (err, user) {
       if (err) {
@@ -34,5 +34,4 @@ module.exports = function (passport) {
       cb(null, user);
     });
   });
-
 };

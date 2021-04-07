@@ -18,6 +18,7 @@ const RegisterPage = () => {
         password === undefined
       ) {
         alert("Please enter your password.");
+        console.log("stay here");
         return false;
       } else {
         const resRaw = await fetch("/checkSameUserName", {
@@ -30,8 +31,11 @@ const RegisterPage = () => {
         const res = await resRaw.json();
         if (res.same === true) {
           alert("This email has been registered already.");
+          console.log("stay here");
           return false;
         } else {
+          console.log("pass all front tests");
+
           await fetch("/register", {
             method: "POST",
             headers: {
@@ -43,7 +47,9 @@ const RegisterPage = () => {
               password: password,
             }),
           }).then((response) => {
+            console.log("enter here");
             if (response.redirected) {
+              console.log(response.url);
               window.location.href = response.url;
             }
         });
@@ -64,43 +70,35 @@ const RegisterPage = () => {
       </div>
 
       <div className="card-body">
-      
-        <form 
-          method="POST"
-          onSubmit={register}>
-          <div class="form-group">
-            <label className="form-label">
-              Email address
-              <input
-                type="email"
-                className="form-control form-control-lg rounded-0"
-                name="username"
-                onChange={(e) => setUserName(e.target.value)}
-               />
-            </label>
-          </div>
-          <div class="form-group">
-            <label className="form-label">
-              Password
-              <input
-                type="password"
-                name="password"
-                className="form-control form-control-lg rounded-0"
-                required=""
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-  
+        <label className="form-label">
+          Email address
+          <input
+            type="email"
+            className="form-control form-control-lg rounded-0"
+            name="username"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </label>
+        <br /> 
+        <label className="form-label">
+          Password
+          <input
+            type="password"
+            name="password"
+            className="form-control form-control-lg rounded-0"
+            required=""
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
         <br />
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" onClick={register}>
           Sign up
         </button>
         <br /> <br />
         <p className="message">
           Registered Already? <Link to="/login">Sign in</Link>
         </p>
-      </form>
+
     </div>
   </div>
   );

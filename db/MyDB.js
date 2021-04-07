@@ -103,73 +103,6 @@ function MyDB() {
     }
   };
 
-  //below code are from previous project, use as reference
-
-  // Get popular puzzles for displaying leader boards.
-  myDB.getPuzzles = async () => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      const db = client.db(DB_NAME);
-      const filesCol = db.collection("puzzles");
-      const files = await filesCol
-        .aggregate([
-          {
-            $project: {
-              leaderBoard: 1,
-              length: { $size: "$usersPlayed" },
-              code: 1,
-            },
-          },
-          { $sort: { length: -1 } },
-          { $limit: 3 },
-        ])
-        .toArray();
-      return files;
-    } finally {
-      client.close();
-    }
-  };
-
-  // get the puzzle searched by puzzle id
-  myDB.getPuzzleById = async (query) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      const db = client.db(DB_NAME);
-      const filesCol = db.collection("puzzles");
-      const files = await filesCol.find({ code: query }).toArray();
-      return files[0];
-    } finally {
-      client.close();
-    }
-  };
-
-  // get three puzzles for each size for playing
-  myDB.getPuzzleBySize = async () => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      const db = client.db(DB_NAME);
-      const filesCol = db.collection("puzzles");
-      const files = new Array(3);
-      var sizes = new Array(5, 10, 15);
-      for (var i = 0; i < 3; i++) {
-        const file = await filesCol
-          .aggregate([{ $match: { size: sizes[i] } }, { $sample: { size: 1 } }])
-          .toArray();
-        files[i] = file;
-      }
-
-      return files;
-    } finally {
-      client.close();
-    }
-  };
-
   //user register
   myDB.createUser = async (user) => {
     let client;
@@ -251,6 +184,81 @@ function MyDB() {
       client.close();
     }
   };
+
+
+
+
+
+
+
+  //below code are from previous project, use as reference
+
+  // Get popular puzzles for displaying leader boards.
+  myDB.getPuzzles = async () => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const filesCol = db.collection("puzzles");
+      const files = await filesCol
+        .aggregate([
+          {
+            $project: {
+              leaderBoard: 1,
+              length: { $size: "$usersPlayed" },
+              code: 1,
+            },
+          },
+          { $sort: { length: -1 } },
+          { $limit: 3 },
+        ])
+        .toArray();
+      return files;
+    } finally {
+      client.close();
+    }
+  };
+
+  // get the puzzle searched by puzzle id
+  myDB.getPuzzleById = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const filesCol = db.collection("puzzles");
+      const files = await filesCol.find({ code: query }).toArray();
+      return files[0];
+    } finally {
+      client.close();
+    }
+  };
+
+  // get three puzzles for each size for playing
+  myDB.getPuzzleBySize = async () => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const filesCol = db.collection("puzzles");
+      const files = new Array(3);
+      var sizes = new Array(5, 10, 15);
+      for (var i = 0; i < 3; i++) {
+        const file = await filesCol
+          .aggregate([{ $match: { size: sizes[i] } }, { $sample: { size: 1 } }])
+          .toArray();
+        files[i] = file;
+      }
+
+      return files;
+    } finally {
+      client.close();
+    }
+  };
+
+  
 
   //save time to leaderboard if the time is in top 10.
   //leaderboard only maintain top 10(shortest) time with its user

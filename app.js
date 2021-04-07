@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
@@ -16,10 +17,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "front/build")));
 
-require("./passportConfig")(passport);
-
 app.use(
-  require("express-session")({
+  session({
     secret: "yongliangandxinyi",
     resave: false,
     saveUninitialized: false,
@@ -28,6 +27,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+require("./passportConfig")(passport);
 
 app.use("/", indexRouter);
 
