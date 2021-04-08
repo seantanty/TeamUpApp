@@ -1,10 +1,38 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const myDB = require("../db/MyDB.js");
+var path = require("path");
 const saltRounds = 10;
+
+//testing ground, please don't delete, sean will delete when needed.
+router.get("/data", function (req, res) {
+  res.send(["Sean", "Tan", "Testing"]);
+});
+
+router.post("/createPost", async (req, res) => {
+  try {
+    const postObj = {
+      title: req.body.title,
+      content: req.body.content,
+    };
+    const dbRes = await myDB.createPost(postObj);
+    if (dbRes == null) {
+      res.redirect("/");
+    } else {
+      res.redirect("/post/:id");
+    }
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+//testing ground, please don't delete, sean will delete when needed.
+
+router.get("*", (req, res) =>
+  res.sendFile(path.resolve("front", "build", "index.html"))
+);
 
 //middle function to check login status before show profile page
 function loggedIn(req, res, next) {
@@ -15,16 +43,16 @@ function loggedIn(req, res, next) {
   }
 }
 
-//testing ground, please don't delete, sean will delete when needed.
-router.get("/data", function (req, res) {
-  res.send(["Sean", "Tan", "Testing"]);
-});
-//testing ground, please don't delete, sean will delete when needed.
-
 router.get("/", function (req, res) {
-  console.log(path.resolve(__dirname));
-  res.sendFile(path.resolve(__dirname), "front/build", "index.html");
+  res.sendFile(path.join(__dirname + "/../public/profile.html"));
 });
+
+/*
+//index GET
+router.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname + "front/build", "index.html"));
+})
+*/
 
 //login POST
 router.post(
@@ -42,9 +70,8 @@ router.get("/logout", loggedIn, function (req, res) {
   res.redirect("/");
 });
 
-
 //check same user name before register
-router.post("/checkSameUserName", async (req, res) => {
+router.post("/checkSameUserName", async (req, res, next) => {
   try {
     console.log("query", req.body);
     const result = await myDB.findSameUserName(req.body);
@@ -65,7 +92,7 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       password: hashedPwd,
       posted: [],
-      teamuped: []
+      teamuped: [],
     };
 
     const dbRes = await myDB.createUser(userObj);
@@ -82,22 +109,19 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 //route to get user info
 router.get("/getUser", (req, res) =>
   res.send({
     username: req.user ? req.user.username : null,
     posted: req.user ? req.user.posted : null,
-    teamuped: req.user ? req.user.teamuped : null
+    teamuped: req.user ? req.user.teamuped : null,
   })
 );
 
 //profile GET
-/*
 router.get("/profile", loggedIn, function (req, res) {
   res.sendFile(path.join(__dirname + "/../public/profile.html"));
 });
-*/
 
 /*index routs*/
 // get puzzle by size
