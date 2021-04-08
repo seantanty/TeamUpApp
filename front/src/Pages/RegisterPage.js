@@ -47,7 +47,6 @@ const RegisterPage = () => {
               password: password,
             }),
           }).then((response) => {
-            console.log("enter here");
             if (response.redirected) {
               console.log(response.url);
               window.location.href = response.url;

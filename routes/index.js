@@ -47,12 +47,10 @@ router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/../public/profile.html"));
 });
 
-/*
 //index GET
 router.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "front/build", "index.html"));
-})
-*/
+  res.sendFile(path.resolve(__dirname), "front/build", "index.html");
+});
 
 //login POST
 router.post(
@@ -83,7 +81,6 @@ router.post("/checkSameUserName", async (req, res, next) => {
 });
 
 //register POST
-
 router.post("/register", async (req, res) => {
   try {
     console.log("user register info", req.body);
@@ -116,6 +113,10 @@ router.get("/getUser", (req, res) =>
     posted: req.user ? req.user.posted : null,
     teamuped: req.user ? req.user.teamuped : null,
   })
+);
+
+router.get("*", (req, res) =>
+  res.sendFile(path.resolve("front", "build", "index.html"))
 );
 
 //profile GET
