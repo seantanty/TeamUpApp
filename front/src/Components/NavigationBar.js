@@ -41,9 +41,9 @@ const NavigationBar = () => {
                   "nav-link" +
                   (location.pathname === "/writepost" ? " active" : "")
                 }
-                to="/writepost"
+                to="/createPost"
               >
-                Write a Post
+                Create Post
               </Link>
             </li>
             <li className="nav-item">
@@ -57,7 +57,6 @@ const NavigationBar = () => {
                 Dashboard
               </Link>
             </li>
-            
           </ul>
         </div>
       </div>
@@ -66,4 +65,3 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
-

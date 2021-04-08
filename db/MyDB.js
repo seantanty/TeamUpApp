@@ -15,6 +15,7 @@ function MyDB() {
     lastModifiedTime: "timestamp",
     category: "type of post",
     interested: [],
+    title: "title",
     text: "text",
     status: "open/closed",
   };

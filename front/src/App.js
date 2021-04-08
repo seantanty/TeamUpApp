@@ -5,8 +5,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomePage from "./Pages/HomePage.js";
 import LoginPage from "./Pages/LoginPage.js";
-import RegisterPage from "./Pages/RegisterPage.js"
+import RegisterPage from "./Pages/RegisterPage.js";
 import Header from "./Components/Header.js";
+import NavigationBar from "./Components/NavigationBar.js";
+import CreatePostPage from "./Pages/CreatePostPage.js";
 
 function App() {
   return (
@@ -25,8 +27,11 @@ function App() {
         <Route path="/">
           <HomePage></HomePage>
         </Route>
-      </Switch>
 
+        <Route path="/createPost">
+          <CreatePostPage></CreatePostPage>
+        </Route>
+      </Switch>
     </Router>
   );
 }

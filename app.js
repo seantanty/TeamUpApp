@@ -29,6 +29,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
 
+app.use(express.static(path.join(__dirname, "front/build")));
 app.use("/", indexRouter);
 
 module.exports = app;

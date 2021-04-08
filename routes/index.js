@@ -30,6 +30,7 @@ router.post("/createPost", async (req, res) => {
 });
 //testing ground, please don't delete, sean will delete when needed.
 
+//This is the key GET route to work with react
 router.get("*", (req, res) =>
   res.sendFile(path.resolve("front", "build", "index.html"))
 );
