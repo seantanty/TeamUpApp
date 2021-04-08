@@ -17,7 +17,6 @@ const LoginPage = () => {
         password: password,
       }),
     }).then((res) => {
-      console.log("enter here");
       if (res.redirected) {
         console.log(res.url);
         window.location.href = res.url;

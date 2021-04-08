@@ -1,10 +1,9 @@
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-export default function NavigationComponent() {
+const NavigationBar = () => {
   const location = useLocation();
-  console.log("Render NavigationComponent", location);
-
-
+  console.log("Render NavigationBar", location);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,44 +35,35 @@ export default function NavigationComponent() {
                 Home
               </Link>
             </li>
-
             <li className="nav-item">
               <Link
                 className={
-                  "nav-link" + (location.pathname === "/writepost" ? " active" : "")
+                  "nav-link" +
+                  (location.pathname === "/writepost" ? " active" : "")
                 }
                 to="/writepost"
               >
                 Write a Post
               </Link>
             </li>
-
             <li className="nav-item">
-
               <Link
                 className={
-                  "nav-link" + (location.pathname === "/dashboard" ? " active" : "")
+                  "nav-link" +
+                  (location.pathname === "/dashboard" ? " active" : "")
                 }
                 to="/dashboard"
               >
                 Dashboard
               </Link>
-            </li>  
-
-            <li className="nav-item">
-
-              <Link
-                className={
-                  "nav-link" + (location.pathname === "/login" ? " active" : "")
-                }
-                to="/login"
-              >
-                Sign in/up
-              </Link>
-            </li>  
+            </li>
+            
           </ul>
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default NavigationBar;
+

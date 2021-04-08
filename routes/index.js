@@ -21,8 +21,8 @@ router.get("/data", function (req, res) {
 });
 //testing ground, please don't delete, sean will delete when needed.
 
+//index GET
 router.get("/", function (req, res) {
-  console.log(path.resolve(__dirname));
   res.sendFile(path.resolve(__dirname), "front/build", "index.html");
 });
 
@@ -42,7 +42,6 @@ router.get("/logout", loggedIn, function (req, res) {
   res.redirect("/");
 });
 
-
 //check same user name before register
 router.post("/checkSameUserName", async (req, res) => {
   try {
@@ -56,7 +55,6 @@ router.post("/checkSameUserName", async (req, res) => {
 });
 
 //register POST
-
 router.post("/register", async (req, res) => {
   try {
     console.log("user register info", req.body);
@@ -65,7 +63,7 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       password: hashedPwd,
       posted: [],
-      teamuped: []
+      teamuped: [],
     };
 
     const dbRes = await myDB.createUser(userObj);
@@ -82,22 +80,24 @@ router.post("/register", async (req, res) => {
   }
 });
 
-
 //route to get user info
 router.get("/getUser", (req, res) =>
   res.send({
     username: req.user ? req.user.username : null,
     posted: req.user ? req.user.posted : null,
-    teamuped: req.user ? req.user.teamuped : null
+    teamuped: req.user ? req.user.teamuped : null,
   })
 );
 
+router.get("*", (req, res) =>
+  res.sendFile(path.resolve("front", "build", "index.html"))
+);
+
+
 //profile GET
-/*
 router.get("/profile", loggedIn, function (req, res) {
   res.sendFile(path.join(__dirname + "/../public/profile.html"));
 });
-*/
 
 /*index routs*/
 // get puzzle by size
