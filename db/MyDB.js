@@ -40,11 +40,8 @@ function MyDB() {
   //get posts
   myDB.getPosts = async (query) => {
     let client;
-    const nPerPage = 20;
     try {
       const realQuery = query.query || "";
-      const page = query.page || 0;
-      console.log("Pagination", page * nPerPage, (page + 1) * nPerPage);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
@@ -52,8 +49,6 @@ function MyDB() {
       const posts = await postsCol
         .find({ title: { $regex: realQuery } })
         .sort({ createdAt: -1 })
-        .skip(page > 0 ? (page - 1) * nPerPage : 0)
-        .limit(nPerPage)
         .toArray();
       return posts;
     } finally {
@@ -62,15 +57,17 @@ function MyDB() {
   };
 
   //get postById
-  myDB.postById = async (query) => {
+  myDB.getPostById = async (query) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
       const postsCol = db.collection("posts");
-      const post = await postsCol.find(query).toArray();
-      return post;
+      let o_id = new ObjectId(query);
+      const post = await postsCol.find({ _id: o_id }).toArray();
+      console.log(post[0]);
+      return post[0];
     } finally {
       client.close();
     }

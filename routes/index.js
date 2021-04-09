@@ -35,33 +35,30 @@ router.post("/createPost", async (req, res) => {
 //get
 router.get("/getPosts", async (req, res) => {
   try {
+    const nPerPage = 20;
+    const page = +req.query.page || 0;
     const dbRes = await myDB.getPosts(req.query);
     res.send({
-      posts: dbRes,
+      posts: dbRes.slice(page * nPerPage, (page + 1) * nPerPage),
       total: dbRes.length,
     });
   } catch (e) {
     console.log("Error", e);
     res.status(400).send({ err: e });
   }
-
-  // Here pagination is implemented in Javascript
-  // res.send({
-  //   movies: movies
-  //     .filter((d) => d.title.includes(query))
-  //     .slice(page * nPerPage, (page + 1) * nPerPage),
-  //   total: movies.length,
-  // });
-
-  // You actually want to implement it in Mongo
-  // something like
-  //
-  // movies
-  //   .find({title: {$regex: query}})
-  //   .sort({ _id: 1 })
-  //   .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
-  //   .limit(nPerPage);
 });
+
+router.post("/getPostById", async (req, res) => {
+  try {
+    const postId = req.body.id;
+    const dbRes = await myDB.getPostById(postId);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
 //testing ground, please don't delete, sean will delete when needed.
 
 //This is the key GET route to work with react

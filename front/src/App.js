@@ -9,6 +9,7 @@ import RegisterPage from "./Pages/RegisterPage.js";
 import Header from "./Components/Header.js";
 import CreatePostPage from "./Pages/CreatePostPage.js";
 import TestingPage from "./Pages/TestingPage.js";
+import IndividualPost from "./Components/IndividualPost.js";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
 
         <Route path="/testingPage">
           <TestingPage></TestingPage>
+        </Route>
+
+        <Route path="/post/:id">
+          <IndividualPost></IndividualPost>
         </Route>
       </Switch>
     </Router>

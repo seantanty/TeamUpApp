@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ListPosts = (props) => {
   const { posts } = props;
@@ -9,18 +10,23 @@ const ListPosts = (props) => {
     let i = 0;
     for (let p of posts) {
       res.push(
-        <div class="forum-item active" key={"Posts" + i}>
-          <div class="row">
-            <div class="col-md-9">
-              <div class="forum-icon">
-                <i class="fa fa-shield"></i>
+        <div className="forum-item active" key={"Posts" + i}>
+          <div className="row">
+            <div className="col-md-9">
+              <div className="forum-icon">
+                <i className="fa fa-shield"></i>
               </div>
-              <a href="forum_post.html" class="forum-item-title">
-                {p.title}
-              </a>
+              <Link
+                to={{
+                  pathname: `/post/${p._id}`,
+                  state: { post: p },
+                }}
+              >
+                <p className="forum-item-title">{p.title}</p>
+              </Link>
             </div>
-            <div class="col-md-1 forum-info">
-              <span class="views-number">Created at: {p.createdAt}</span>
+            <div className="col-md-2 forum-info">
+              <span className="views-number">Created at: {p.createdAt}</span>
             </div>
           </div>
         </div>
