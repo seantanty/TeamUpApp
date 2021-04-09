@@ -13,9 +13,12 @@ router.get("/data", function (req, res) {
 
 router.post("/createPost", async (req, res) => {
   try {
+    console.log(new Date());
     const postObj = {
+      user: req.user._id,
       title: req.body.title,
       content: req.body.content,
+      createdAt: new Date(),
     };
     const dbRes = await myDB.createPost(postObj);
     if (dbRes == null) {
@@ -27,6 +30,37 @@ router.post("/createPost", async (req, res) => {
     console.log("Error", e);
     res.status(400).send({ err: e });
   }
+});
+
+//get
+router.get("/getPosts", async (req, res) => {
+  try {
+    const dbRes = await myDB.getPosts(req.query);
+    res.send({
+      posts: dbRes,
+      total: dbRes.length,
+    });
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+
+  // Here pagination is implemented in Javascript
+  // res.send({
+  //   movies: movies
+  //     .filter((d) => d.title.includes(query))
+  //     .slice(page * nPerPage, (page + 1) * nPerPage),
+  //   total: movies.length,
+  // });
+
+  // You actually want to implement it in Mongo
+  // something like
+  //
+  // movies
+  //   .find({title: {$regex: query}})
+  //   .sort({ _id: 1 })
+  //   .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
+  //   .limit(nPerPage);
 });
 //testing ground, please don't delete, sean will delete when needed.
 

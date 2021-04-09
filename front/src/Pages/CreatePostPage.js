@@ -2,21 +2,23 @@ import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 
 const CreatePostPage = () => {
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const login = async () => {
+  async function createPost() {
+    let time = new Date();
     await fetch("/createPost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        title: title,
+        content: content,
+        createdAt: time.toString(),
       }),
     }).then((res) => console.log(res));
-  };
+  }
 
   return (
     <div className="container">
@@ -28,7 +30,12 @@ const CreatePostPage = () => {
               <label for="title">
                 Title <span class="require">*</span>
               </label>
-              <input type="text" class="form-control" name="title" />
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
 
             <div class="form-group">
@@ -37,6 +44,7 @@ const CreatePostPage = () => {
                 rows="5"
                 class="form-control"
                 name="description"
+                onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>
 
@@ -47,7 +55,11 @@ const CreatePostPage = () => {
             </div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                onClick={createPost}
+              >
                 Create
               </button>
               <button class="btn btn-default">Cancel</button>

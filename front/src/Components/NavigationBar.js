@@ -57,6 +57,17 @@ const NavigationBar = () => {
                 Dashboard
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className={
+                  "nav-link" +
+                  (location.pathname === "/testingPage" ? " active" : "")
+                }
+                to="/testingPage"
+              >
+                TestingPage
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

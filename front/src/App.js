@@ -7,8 +7,8 @@ import HomePage from "./Pages/HomePage.js";
 import LoginPage from "./Pages/LoginPage.js";
 import RegisterPage from "./Pages/RegisterPage.js";
 import Header from "./Components/Header.js";
-import NavigationBar from "./Components/NavigationBar.js";
 import CreatePostPage from "./Pages/CreatePostPage.js";
+import TestingPage from "./Pages/TestingPage.js";
 
 function App() {
   return (
@@ -24,12 +24,16 @@ function App() {
           <RegisterPage></RegisterPage>
         </Route>
 
-        <Route path="/">
+        <Route path="/" exact>
           <HomePage></HomePage>
         </Route>
 
         <Route path="/createPost">
           <CreatePostPage></CreatePostPage>
+        </Route>
+
+        <Route path="/testingPage">
+          <TestingPage></TestingPage>
         </Route>
       </Switch>
     </Router>

@@ -38,33 +38,43 @@ function MyDB() {
   };
 
   //get posts
-  myDB.getPosts = async () => {
+  myDB.getPosts = async (query) => {
     let client;
+    const nPerPage = 20;
     try {
+      const realQuery = query.query || "";
+      const page = query.page || 0;
+      console.log("Pagination", page * nPerPage, (page + 1) * nPerPage);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
-      const filesCol = db.collection("posts");
-      const files = await filesCol
-        .aggregate([
-          {
-            $project: {
-              leaderBoard: 1,
-              length: { $size: "$usersPlayed" },
-              code: 1,
-            },
-          },
-          { $sort: { length: -1 } },
-          { $limit: 3 },
-        ])
+      const postsCol = db.collection("posts");
+      const posts = await postsCol
+        .find({ title: { $regex: realQuery } })
+        .sort({ createdAt: -1 })
+        .skip(page > 0 ? (page - 1) * nPerPage : 0)
+        .limit(nPerPage)
         .toArray();
-      return files;
+      return posts;
     } finally {
       client.close();
     }
   };
 
   //get postById
+  myDB.postById = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const postsCol = db.collection("posts");
+      const post = await postsCol.find(query).toArray();
+      return post;
+    } finally {
+      client.close();
+    }
+  };
 
   //get postByFilter
 
@@ -186,12 +196,6 @@ function MyDB() {
     }
   };
 
-
-
-
-
-
-
   //below code are from previous project, use as reference
 
   // Get popular puzzles for displaying leader boards.
@@ -258,8 +262,6 @@ function MyDB() {
       client.close();
     }
   };
-
-  
 
   //save time to leaderboard if the time is in top 10.
   //leaderboard only maintain top 10(shortest) time with its user
