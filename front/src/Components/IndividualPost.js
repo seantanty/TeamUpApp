@@ -6,7 +6,8 @@ const style = { fontSize: "22pt" };
 
 function IndividualPost(props) {
   const { state } = useLocation();
-  let [post, setPost] = useState([]);
+  const [post, setPost] = useState([]);
+  const [comment, setComment] = useState([]);
 
   useEffect(() => {
     const getPostById = async () => {
@@ -28,88 +29,82 @@ function IndividualPost(props) {
     getPostById();
   }, []);
 
-  // function renderCommentForm() {
-  //    return (
-  //       <Form onSubmit={this.handleSubmit}>
-  //           <div style={{width: '90%', margin: '30px auto'}}>
-  //               <Form.Group>
-  //                   <Form.Control as="textarea" onChange={this.handleChange} value={this.state.text} rows={5} placeholder="Write something for this comment..."/>
-  //                   </Form.Group>
-  //                   <Button variant="primary" type="submit">
-  //                       Reply
-  //                   </Button>
-  //               </div>
-  //           </Form>
-  //       )
-  // }
+  const createComment = async () => {
+    await fetch("/createComment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId: post._id,
+        comment: comment,
+      }),
+    }).then(() => {
+      window.location.reload();
+    });
+  };
 
   return (
     <div>
-      <div class="container mt-5">
-        <div class="d-flex justify-content-center row">
-          <div class="col-md-8">
-            <div class="d-flex flex-column comment-section">
-              <div class="bg-white p-2">
-                <div class="d-flex flex-row user-info">
+      <div className="container mt-5">
+        <div className="d-flex justify-content-center row">
+          <div className="col-md-12">
+            <div className="d-flex flex-column comment-section">
+              <div className="bg-white p-2">
+                <div className="d-flex flex-row user-info">
                   <img
-                    class="rounded-circle"
+                    className="rounded-circle"
                     src="https://i.imgur.com/RpzrMR2.jpg"
                     width="40"
                     alt="Avatar"
                   />
-                  <div class="d-flex flex-column justify-content-start ml-2">
-                    <span class="d-block font-weight-bold name">
-                      Marry Andrews
+                  <div className="d-flex flex-column justify-content-start ml-2">
+                    <span className="d-block font-weight-bold name">
+                      {post.user}
                     </span>
-                    <span class="date text-black-50">
-                      Shared publicly - Jan 2020
+                    <span className="date text-black-50">
+                      Created at: {post.createdAt}
                     </span>
                   </div>
                 </div>
-                <div class="mt-2">
-                  <p class="comment-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
+                <div className="mt-2">
+                  <h4>{post.title}</h4>
+                  <p className="comment-text">{post.content}</p>
                 </div>
               </div>
-              <div class="bg-white">
-                <div class="d-flex flex-row fs-12">
-                  <div class="like p-2 cursor">
-                    <i class="fa fa-thumbs-o-up"></i>
-                    <span class="ml-1">Like</span>
-                  </div>
-                  <div class="like p-2 cursor">
-                    <i class="fa fa-commenting-o"></i>
-                    <span class="ml-1">Comment</span>
-                  </div>
-                  <div class="like p-2 cursor">
-                    <i class="fa fa-share"></i>
-                    <span class="ml-1">Share</span>
-                  </div>
-                </div>
-              </div>
-              <div class="bg-light p-2">
-                <div class="d-flex flex-row align-items-start">
-                  <img
-                    class="rounded-circle"
-                    src="https://i.imgur.com/RpzrMR2.jpg"
-                    width="40"
-                    alt="Avatar"
-                  />
-                  <textarea class="form-control ml-1 shadow-none textarea"></textarea>
-                </div>
-                <div class="mt-2 text-right">
+              <div className="bg-white">
+                <div className="d-flex flex-row fs-12">
+                  <button type="button" className="btn btn-outline-danger">
+                    <i className="fa fa-heart-o"></i>
+                    <span className="ml-1">Like</span>
+                  </button>
                   <button
-                    class="btn btn-primary btn-sm shadow-none"
                     type="button"
+                    className="btn btn-outline-primary"
+                    style={{ marginLeft: "5px" }}
+                  >
+                    <i className="fa fa-commenting-o"></i>
+                    <span className="ml-1">Comment</span>
+                  </button>
+                </div>
+              </div>
+              <div className="bg-light p-2">
+                <div className="d-flex flex-row align-items-start">
+                  <textarea
+                    className="col-md-6 form-control ml-1 textarea"
+                    onChange={(e) => setComment(e.target.value)}
+                  ></textarea>
+                </div>
+                <div className="mt-2 text-right">
+                  <button
+                    className="btn btn-primary btn-sm"
+                    type="button"
+                    onClick={createComment}
                   >
                     Post comment
                   </button>
                   <button
-                    class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+                    className="btn btn-outline-primary btn-sm ml-1"
                     type="button"
                   >
                     Cancel
@@ -120,13 +115,6 @@ function IndividualPost(props) {
           </div>
         </div>
       </div>
-      <h1>ID: {post._id}</h1>
-      <p>Title: {post.title}</p>
-      <p>Created at: {post.createdAt}</p>
-      <p>{post.content}</p>
-      <button type="button" className="btn btn-primary">
-        Reply
-      </button>
     </div>
   );
 }

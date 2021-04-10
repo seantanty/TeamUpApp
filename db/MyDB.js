@@ -10,13 +10,12 @@ function MyDB() {
 
   const postSchema = {
     postId: "_id",
-    createdBy: "user._id",
-    createTime: "timestamp",
-    lastModifiedTime: "timestamp",
-    category: "type of post",
+    user: "user._id",
+    createAt: "timestamp",
+    category: "type of event",
     interested: [],
     title: "title",
-    text: "text",
+    content: "content",
     status: "open/closed",
   };
 
@@ -31,6 +30,29 @@ function MyDB() {
       const postsCol = db.collection("posts");
       //need to add a post backend verification
       const res = await postsCol.insertOne(post);
+      return res;
+    } finally {
+      client.close();
+    }
+  };
+
+  myDB.createComment = async (comment, userId, postId) => {
+    let client;
+    try {
+      let u_id = new ObjectId(userId);
+      comment.user = { _id: u_id };
+      let p_id = new ObjectId(postId);
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const postsCol = db.collection("posts");
+      //need to add a post backend verification
+      const res = await db.collection("posts").updateOne(
+        { _id: p_id },
+        {
+          $push: { comments: { 0: query.username, 1: query.time } },
+        }
+      );
       return res;
     } finally {
       client.close();

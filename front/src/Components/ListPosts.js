@@ -13,9 +13,6 @@ const ListPosts = (props) => {
         <div className="forum-item active" key={"Posts" + i}>
           <div className="row">
             <div className="col-md-9">
-              <div className="forum-icon">
-                <i className="fa fa-shield"></i>
-              </div>
               <Link
                 to={{
                   pathname: `/post/${p._id}`,

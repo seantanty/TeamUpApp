@@ -17,7 +17,12 @@ const CreatePostPage = () => {
         content: content,
         createdAt: time.toString(),
       }),
-    }).then((res) => console.log(res));
+    }).then((res) => {
+      if (res.redirected) {
+        console.log(res.url);
+        window.location.href = res.url;
+      }
+    });
   }
 
   return (
@@ -26,43 +31,43 @@ const CreatePostPage = () => {
         <div className="col-md-8 col-md-offset-2">
           <h1>Create Post</h1>
           <form action="">
-            <div class="form-group">
+            <div className="form-group">
               <label for="title">
-                Title <span class="require">*</span>
+                Title <span className="require">*</span>
               </label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 name="title"
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <label for="description">Description</label>
               <textarea
                 rows="5"
-                class="form-control"
+                className="form-control"
                 name="description"
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <p>
-                <span class="require">*</span> - required fields
+                <span className="require">*</span> - required fields
               </p>
             </div>
 
-            <div class="form-group">
+            <div className="form-group">
               <button
                 type="submit"
-                class="btn btn-primary"
+                className="btn btn-primary"
                 onClick={createPost}
               >
                 Create
               </button>
-              <button class="btn btn-default">Cancel</button>
+              <button className="btn btn-default">Cancel</button>
             </div>
           </form>
         </div>

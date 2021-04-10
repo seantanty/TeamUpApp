@@ -21,10 +21,11 @@ router.post("/createPost", async (req, res) => {
       createdAt: new Date(),
     };
     const dbRes = await myDB.createPost(postObj);
+    console.log(dbRes.json());
     if (dbRes == null) {
       res.redirect("/");
     } else {
-      res.redirect("/post/:id");
+      res.redirect("/");
     }
   } catch (e) {
     console.log("Error", e);
@@ -52,6 +53,25 @@ router.post("/getPostById", async (req, res) => {
   try {
     const postId = req.body.id;
     const dbRes = await myDB.getPostById(postId);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/createComment", async (req, res) => {
+  try {
+    console.log(new Date());
+    const commentObj = {
+      comment: req.body.comment,
+      createdAt: new Date(),
+    };
+    const dbRes = await myDB.createComment(
+      commentObj,
+      req.user._id,
+      req.body.postId
+    );
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
