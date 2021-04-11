@@ -101,6 +101,41 @@ function MyDB() {
     }
   };
 
+  myDB.unInterest = async (userId, postId) => {
+    let client;
+    try {
+      const u_id = new ObjectId(userId);
+      const p_id = new ObjectId(postId);
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      //need to add a post backend verification
+      const res1 = await db.collection("posts").updateOne(
+        { _id: p_id },
+        {
+          $pull: {
+            interested: {
+              userId: u_id,
+            },
+          },
+        }
+      );
+      const res2 = await db.collection("Users").updateOne(
+        { _id: u_id },
+        {
+          $pull: {
+            interested: {
+              userId: p_id,
+            },
+          },
+        }
+      );
+      return { res1, res2 };
+    } finally {
+      client.close();
+    }
+  };
+
   //get comments
   myDB.getComments = async (query) => {
     let client;

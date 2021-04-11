@@ -196,14 +196,6 @@ router.get("/getUser", (req, res) =>
   })
 );
 
-
-
-
-
-
-
-
-
 //profile GET
 router.get("/profile", loggedIn, function (req, res) {
   res.sendFile(path.join(__dirname + "/../public/profile.html"));

@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
 import ListComments from "../Components/ListComments.js";
-
-const style = { fontSize: "22pt" };
+import CommentBox from "../Components/CommentBox.js";
 
 function IndividualPost(props) {
   const { state } = useLocation();
   const [post, setPost] = useState([]);
-  const [comment, setComment] = useState([]);
   const [comments, setComments] = useState([]);
+  const [displayCommentBox, setdisplayCommentBox] = useState(false);
+
+  function clickComment() {
+    setdisplayCommentBox(!displayCommentBox);
+  }
+  function convertDate(dateString) {
+    let postDate = new Date(dateString);
+    return postDate.toLocaleString();
+  }
 
   useEffect(() => {
     const getPostById = async () => {
@@ -22,7 +28,6 @@ function IndividualPost(props) {
           body: JSON.stringify({ id: state.post._id }),
         });
         const res = await resRaw.json();
-        console.log(res);
         setPost(res);
         setComments(res.comments);
       } catch (error) {
@@ -31,21 +36,6 @@ function IndividualPost(props) {
     };
     getPostById();
   }, []);
-
-  const createComment = async () => {
-    await fetch("/createComment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        postId: post._id,
-        comment: comment,
-      }),
-    }).then(() => {
-      window.location.reload();
-    });
-  };
 
   return (
     <div>
@@ -66,7 +56,7 @@ function IndividualPost(props) {
                       {post.user}
                     </span>
                     <span className="date text-black-50">
-                      Created at: {post.createdAt}
+                      Created at: {convertDate(post.createdAt)}
                     </span>
                   </div>
                 </div>
@@ -85,35 +75,14 @@ function IndividualPost(props) {
                     type="button"
                     className="btn btn-outline-primary"
                     style={{ marginLeft: "5px" }}
+                    onClick={clickComment}
                   >
                     <i className="fa fa-commenting-o"></i>
                     <span className="ml-1">Comment</span>
                   </button>
                 </div>
               </div>
-              <div className="bg-light p-2">
-                <div className="d-flex flex-row align-items-start">
-                  <textarea
-                    className="col-md-6 form-control ml-1 textarea"
-                    onChange={(e) => setComment(e.target.value)}
-                  ></textarea>
-                </div>
-                <div className="mt-2 text-right">
-                  <button
-                    className="btn btn-primary btn-sm"
-                    type="button"
-                    onClick={createComment}
-                  >
-                    Post comment
-                  </button>
-                  <button
-                    className="btn btn-outline-primary btn-sm ml-1"
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
+              <CommentBox display={displayCommentBox} post={post}></CommentBox>
             </div>
           </div>
         </div>
@@ -123,7 +92,5 @@ function IndividualPost(props) {
     </div>
   );
 }
-
-IndividualPost.propTypes = {};
 
 export default IndividualPost;

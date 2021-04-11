@@ -18,7 +18,7 @@ const LoginPage = () => {
       }),
     }).then((res) => {
       if (res.redirected) {
-        const user = JSON.stringify({username: username});
+        const user = JSON.stringify({ username: username });
         localStorage.setItem("user", user);
         window.location.href = res.url;
       }

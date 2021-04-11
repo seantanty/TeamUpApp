@@ -39,7 +39,7 @@ const ListPosts = (props) => {
 };
 
 ListPosts.propTypes = {
-  movies: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 export default ListPosts;

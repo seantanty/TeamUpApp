@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ListPosts from "../Components/ListPosts.js";
 import PaginationComponent from "../Components/PaginationComponent.js";
+import "../styles/home.css";
 
 function HomePage() {
   let [posts, setPosts] = useState([]);
@@ -37,37 +38,52 @@ function HomePage() {
   };
 
   return (
-    <div className="App">
-      <h1>My Front!</h1>
-      <label className="form-label">
-        Search:{" "}
-        <input
-          ref={inSearchRef}
-          className="form-control"
-          type="text"
-          onChange={(evt) => {
-            setQuery(evt.target.value);
-          }}
-          onKeyPress={(evt) => {
-            console.log("keypress", evt.keyCode, evt.code);
-            if (evt.code === "Enter") {
-              console.log("Reload Data");
-              setReload(reload + 1);
-            }
-          }}
-          value={query}
-        />
-        <button
-          onClick={() => {
-            const now = new Date();
+    <div className="container">
+      <div className="col-12 col-md-10 col-lg-8" style={{ margin: "0 auto" }}>
+        <div className="card card-sm" id="searchBarBox">
+          <div
+            className="card-body row no-gutters align-items-center"
+            id="searchBar"
+          >
+            <div className="col-auto">
+              <i className="fa fa-search h4 text-body"></i>
+            </div>
+            <div className="col">
+              <input
+                ref={inSearchRef}
+                className="form-control form-control-lg form-control-borderless"
+                type="text"
+                placeholder="Search topics or keywords"
+                onChange={(evt) => {
+                  setQuery(evt.target.value);
+                }}
+                onKeyPress={(evt) => {
+                  console.log("keypress", evt.keyCode, evt.code);
+                  if (evt.code === "Enter") {
+                    console.log("Reload Data");
+                    setReload(reload + 1);
+                  }
+                }}
+                value={query}
+              />
+            </div>
+            <div className="col-auto">
+              <button
+                className="btn btn-lg btn-success"
+                onClick={() => {
+                  const now = new Date();
 
-            console.log("time is ", now);
-            setReload(reload + 1);
-          }}
-        >
-          Search
-        </button>
-      </label>
+                  console.log("time is ", now);
+                  setReload(reload + 1);
+                }}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <ListPosts posts={posts}></ListPosts>
 
       <PaginationComponent
