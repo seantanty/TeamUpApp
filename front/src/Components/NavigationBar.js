@@ -5,10 +5,12 @@ const NavigationBar = () => {
   const location = useLocation();
   console.log("Render NavigationBar", location);
 
+  /*
   const buttonStyle = {
     background: "none",
     border: 0,
   };
+  */
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
