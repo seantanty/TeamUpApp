@@ -95,9 +95,11 @@ function loggedIn(req, res, next) {
   }
 }
 
+/*
 router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/../public/profile.html"));
 });
+*/
 
 //index GET
 router.get("/", function (req, res) {
@@ -115,8 +117,16 @@ router.post(
 );
 
 //logout GET
+/*
 router.get("/logout", loggedIn, function (req, res) {
   req.logout();
+  res.redirect("/");
+});
+*/
+
+router.get("/logout", function (req, res) {
+  req.logout();
+  console.log("successful logout");
   res.redirect("/");
 });
 
@@ -166,6 +176,14 @@ router.get("/getUser", (req, res) =>
     teamuped: req.user ? req.user.teamuped : null,
   })
 );
+
+
+
+
+
+
+
+
 
 //profile GET
 router.get("/profile", loggedIn, function (req, res) {

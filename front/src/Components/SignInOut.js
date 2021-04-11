@@ -1,10 +1,10 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const SignInOut = () => {
   const [link, setLink] = useState("/login");
   const [buttonValue, setButtonValue] = useState("SIGN IN/UP");
-  
+
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
     console.log("Got user", loggedInUser);
@@ -16,10 +16,8 @@ const SignInOut = () => {
       setLink("/login");
       setButtonValue("SIGN IN/UP");
     }
-    console.log("link", buttonValue);
-  }, [buttonValue]
-  );
-  
+  }, [buttonValue]);
+
   const logInOut = async () => {
     if (buttonValue === "SIGN OUT") {
       console.log("get logout request");
