@@ -18,23 +18,22 @@ const LoginPage = () => {
       }),
     });
 
-    /*
-    const fethUser = async () => {
-      const userRaw = await fetch("/getUser");
-      const user = await userRaw.json();
-      return user;
-    };
-    */
-
-    //const loginedUser = fethUser();
-    //console.log("user", loginedUser);
-    const res = await resRaw.json();
-    const userInfo = JSON.stringify({
-      username: username,
-      userid: res.userid,
-    });
-    localStorage.setItem("user", userInfo);
-    window.location.href = "/";
+    console.log("resRaw", resRaw);
+    console.log("redirected?", resRaw.redirected);
+    if (resRaw.redirected) {
+      alert("Incorrect username or password!");
+    } else {
+      const res = await resRaw.json();
+      console.log("result", res);
+      const userInfo = JSON.stringify({
+        username: username,
+        userid: res.userid,
+      });
+      localStorage.setItem("user", userInfo);
+      window.location.href = "/";
+    }
+    
+      
   };
 
   return (
