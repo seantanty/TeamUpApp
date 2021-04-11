@@ -134,7 +134,9 @@ router.post(
   passport.authenticate("local", { failureRedirect: "/login" }),
   function (req, res) {
     console.log("successful login");
-    res.redirect("/");
+    console.log("userid", req.user._id);
+    res.send({userid: req.user._id});
+    //res.redirect("/");
   }
 );
 

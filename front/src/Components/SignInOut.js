@@ -18,15 +18,13 @@ const SignInOut = () => {
     }
   }, [buttonValue]);
 
-  const logInOut = async () => {
+  const logInOut = async (event) => {
+    event.preventDefault();
     if (buttonValue === "SIGN OUT") {
       console.log("get logout request");
-      await fetch("/logout").then((res) => {
-        localStorage.removeItem("user");
-        if (res.redirected) {
-          window.location.href = "/";
-        }
-      });
+      await fetch("/logout");
+      localStorage.removeItem("user");
+      window.location.href = "/";
     } else {
       window.location.href = "/login";
     }
