@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");
-
   const [password, setPassword] = useState("");
 
-  const login = async () => {
-    await fetch("/login", {
+  const login = async (event) => {
+    event.preventDefault();
+    const resRaw = await fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,13 +16,25 @@ const LoginPage = () => {
         username: username,
         password: password,
       }),
-    }).then((res) => {
-      if (res.redirected) {
-        const user = JSON.stringify({ username: username });
-        localStorage.setItem("user", user);
-        window.location.href = res.url;
-      }
     });
+
+    /*
+    const fethUser = async () => {
+      const userRaw = await fetch("/getUser");
+      const user = await userRaw.json();
+      return user;
+    };
+    */
+
+    //const loginedUser = fethUser();
+    //console.log("user", loginedUser);
+    const res = await resRaw.json();
+    const userInfo = JSON.stringify({
+      username: username,
+      userid: res.userid,
+    });
+    localStorage.setItem("user", userInfo);
+    window.location.href = "/";
   };
 
   return (
