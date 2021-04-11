@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../styles/listcomments.css";
 
 const ListComments = (props) => {
   const { comments } = props;
@@ -8,16 +9,14 @@ const ListComments = (props) => {
     let res = [];
     let i = 0;
     for (let c of comments) {
+      let commentDate = new Date(c.createdAt);
+      let dateToShow = commentDate.toLocaleString();
       res.push(
-        <div className="forum-item active" key={"Comments" + i}>
-          <div className="row">
-            <div className="col-md-9">
-              <h5>{c.user}</h5>
-              <p className="forum-item-title">{c.content}</p>
-            </div>
-            <div className="col-md-2 forum-info">
-              <span className="views-number">Created at: {c.createdAt}</span>
-            </div>
+        <div className="comment-item active" key={"Comments" + i}>
+          <div className="comment mt-4 text-justify float-left"></div>
+          <div className="comment card p-3 mt-2">
+            <h5>{c.username}</h5> <span>{dateToShow}</span> <br />
+            <p>{c.content}</p>
           </div>
         </div>
       );

@@ -9,23 +9,35 @@ const ListPosts = (props) => {
     let res = [];
     let i = 0;
     for (let p of posts) {
+      let replies = 0;
+      if (p.comments) {
+        replies = p.comments.length;
+      }
+      let postDate = new Date(p.createdAt);
+      let dateToShow = postDate.toLocaleString();
       res.push(
         <div className="forum-item active" key={"Posts" + i}>
-          <div className="row">
-            <div className="col-md-9">
-              <Link
-                to={{
-                  pathname: `/post/${p._id}`,
-                  state: { post: p },
-                }}
-              >
-                <p className="forum-item-title">{p.title}</p>
-              </Link>
-            </div>
-            <div className="col-md-2 forum-info">
-              <span className="views-number">Created at: {p.createdAt}</span>
+          <div className="card-body py-3">
+            <div className="row no-gutters align-items-center">
+              <div className="col">
+                <Link
+                  to={{
+                    pathname: `/post/${p._id}`,
+                    state: { post: p },
+                  }}
+                >
+                  <p className="forum-item-title">{p.title}</p>
+                </Link>
+              </div>
+              <div className="d-none d-md-block col-4">
+                <div className="row no-gutters align-items-center">
+                  <div className="col-4">{replies}</div>
+                  <div className="col-8">{dateToShow}</div>
+                </div>
+              </div>
             </div>
           </div>
+          <hr className="m-0" />
         </div>
       );
       i += 1;

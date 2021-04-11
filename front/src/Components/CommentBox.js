@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/commentbox.css";
 
 const CommentBox = (props) => {
   const { post, display } = props;
@@ -26,9 +27,10 @@ const CommentBox = (props) => {
             <textarea
               className="col-md-6 form-control ml-1 textarea"
               onChange={(e) => setComment(e.target.value)}
+              style={{ resize: "none" }}
             ></textarea>
           </div>
-          <div className="mt-2 text-right">
+          <div className="mt-2 pull-right">
             <button
               className="btn btn-primary btn-sm"
               type="button"

@@ -12,12 +12,15 @@ router.post("/createPost", async (req, res) => {
   try {
     console.log(new Date());
     const postObj = {
-      user: req.user._id,
+      userId: req.user._id,
+      username: req.user.username,
       title: req.body.title,
       content: req.body.content,
       createdAt: new Date(),
       comments: [],
       intereted: [],
+      open: true,
+      lastUpdated: new Date(),
     };
     const dbRes = await myDB.createPost(postObj);
     if (dbRes == null) {
@@ -33,7 +36,7 @@ router.post("/createPost", async (req, res) => {
 
 router.get("/getPosts", async (req, res) => {
   try {
-    const nPerPage = 20;
+    const nPerPage = 12;
     const page = +req.query.page || 0;
     const dbRes = await myDB.getPosts(req.query);
     res.send({
@@ -67,6 +70,7 @@ router.post("/createComment", async (req, res) => {
     const dbRes = await myDB.createComment(
       commentObj,
       req.user._id,
+      req.user.username,
       req.body.postId
     );
     res.send(dbRes);

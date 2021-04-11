@@ -36,7 +36,7 @@ function MyDB() {
     }
   };
 
-  myDB.createComment = async (comment, userId, postId) => {
+  myDB.createComment = async (comment, userId, username, postId) => {
     let client;
     try {
       const u_id = new ObjectId(userId);
@@ -53,7 +53,8 @@ function MyDB() {
           $push: {
             comments: {
               _id: newId,
-              user: u_id,
+              userId: u_id,
+              username: username,
               content: comment.comment,
               createdAt: new Date(),
             },

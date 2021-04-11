@@ -41,28 +41,20 @@ function IndividualPost(props) {
     <div>
       <div className="container mt-5">
         <div className="d-flex justify-content-center row">
-          <div className="col-md-12">
+          <div className="col-md-10">
             <div className="d-flex flex-column comment-section">
               <div className="bg-white p-2">
+                <div className="mt-2">
+                  <h4>{post.title}</h4>
+                  <p className="comment-text">{post.content}</p>
+                </div>
                 <div className="d-flex flex-row user-info">
-                  <img
-                    className="rounded-circle"
-                    src="https://i.imgur.com/RpzrMR2.jpg"
-                    width="40"
-                    alt="Avatar"
-                  />
                   <div className="d-flex flex-column justify-content-start ml-2">
-                    <span className="d-block font-weight-bold name">
-                      {post.user}
-                    </span>
+                    <h6>Posted by: {post.username}</h6>
                     <span className="date text-black-50">
                       Created at: {convertDate(post.createdAt)}
                     </span>
                   </div>
-                </div>
-                <div className="mt-2">
-                  <h4>{post.title}</h4>
-                  <p className="comment-text">{post.content}</p>
                 </div>
               </div>
               <div className="bg-white">
@@ -83,12 +75,14 @@ function IndividualPost(props) {
                 </div>
               </div>
               <CommentBox display={displayCommentBox} post={post}></CommentBox>
+              <div className="bg-white p-2">
+                <h4>Comments:</h4>
+                <ListComments comments={comments}></ListComments>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <ListComments comments={comments}></ListComments>
     </div>
   );
 }
