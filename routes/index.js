@@ -7,9 +7,6 @@ var path = require("path");
 const saltRounds = 10;
 
 //testing ground, please don't delete, sean will delete when needed.
-router.get("/data", function (req, res) {
-  res.send(["Sean", "Tan", "Testing"]);
-});
 
 router.post("/createPost", async (req, res) => {
   try {
@@ -19,9 +16,10 @@ router.post("/createPost", async (req, res) => {
       title: req.body.title,
       content: req.body.content,
       createdAt: new Date(),
+      comments: [],
+      intereted: [],
     };
     const dbRes = await myDB.createPost(postObj);
-    console.log(dbRes.json());
     if (dbRes == null) {
       res.redirect("/");
     } else {
@@ -33,7 +31,6 @@ router.post("/createPost", async (req, res) => {
   }
 });
 
-//get
 router.get("/getPosts", async (req, res) => {
   try {
     const nPerPage = 20;
@@ -72,6 +69,27 @@ router.post("/createComment", async (req, res) => {
       req.user._id,
       req.body.postId
     );
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/expressInterest", async (req, res) => {
+  try {
+    const dbRes = await myDB.expressInterest(req.user._id, req.body.postId);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.get("/getComments", async (req, res) => {
+  try {
+    const dbRes = await myDB.getComments(req.query);
+    console.log(dbRes);
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
@@ -152,6 +170,7 @@ router.post("/register", async (req, res) => {
       password: hashedPwd,
       posted: [],
       teamuped: [],
+      intereted: [],
     };
 
     const dbRes = await myDB.createUser(userObj);

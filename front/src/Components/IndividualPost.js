@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import ListComments from "../Components/ListComments.js";
 
 const style = { fontSize: "22pt" };
 
@@ -8,6 +9,7 @@ function IndividualPost(props) {
   const { state } = useLocation();
   const [post, setPost] = useState([]);
   const [comment, setComment] = useState([]);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const getPostById = async () => {
@@ -22,6 +24,7 @@ function IndividualPost(props) {
         const res = await resRaw.json();
         console.log(res);
         setPost(res);
+        setComments(res.comments);
       } catch (error) {
         console.error(error);
       }
@@ -115,6 +118,8 @@ function IndividualPost(props) {
           </div>
         </div>
       </div>
+
+      <ListComments comments={comments}></ListComments>
     </div>
   );
 }
