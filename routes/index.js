@@ -121,7 +121,7 @@ router.get("/logout", loggedIn, function (req, res) {
 });
 
 //check same user name before register
-router.post("/checkSameUserName", async (req, res, next) => {
+router.post("/checkSameUserName", async (req, res) => {
   try {
     console.log("query", req.body);
     const result = await myDB.findSameUserName(req.body);
@@ -165,10 +165,6 @@ router.get("/getUser", (req, res) =>
     posted: req.user ? req.user.posted : null,
     teamuped: req.user ? req.user.teamuped : null,
   })
-);
-
-router.get("*", (req, res) =>
-  res.sendFile(path.resolve("front", "build", "index.html"))
 );
 
 //profile GET

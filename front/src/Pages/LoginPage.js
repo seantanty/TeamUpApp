@@ -18,7 +18,9 @@ const LoginPage = () => {
       }),
     }).then((res) => {
       if (res.redirected) {
-        console.log(res.url);
+        const user = JSON.stringify({username: username});
+        localStorage.setItem("user", user);
+        
         window.location.href = res.url;
       }
     });

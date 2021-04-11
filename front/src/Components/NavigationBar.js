@@ -5,6 +5,11 @@ const NavigationBar = () => {
   const location = useLocation();
   console.log("Render NavigationBar", location);
 
+  const buttonStyle = {
+    background: "none",
+    border: 0,
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -19,6 +24,7 @@ const NavigationBar = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          //style={buttonStyle}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -39,11 +45,11 @@ const NavigationBar = () => {
               <Link
                 className={
                   "nav-link" +
-                  (location.pathname === "/writepost" ? " active" : "")
+                  (location.pathname === "/createPost" ? " active" : "")
                 }
                 to="/createPost"
               >
-                Create Post
+                Write a Post
               </Link>
             </li>
             <li className="nav-item">

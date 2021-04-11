@@ -1,32 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
 const SignInOut = () => {
-  let [link, setLink] = useState("/login");
-  let [buttonValue, setButtonValue] = useState("Sign in/up");
+  const [link, setLink] = useState("/login");
+  const [buttonValue, setButtonValue] = useState("SIGN IN/UP");
+  
+  useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
+    console.log("Got user", loggedInUser);
 
-  const fetchUser = async () => {
-    const userRaw = await fetch("/getUser");
-    const user = await userRaw.json();
-    //console.log("Got user", user); //TO DO! 
-    
-    if (user.username) {
+    if (loggedInUser) {
       setLink("/logout");
-      setButtonValue("Sign out");
+      setButtonValue("SIGN OUT");
     } else {
       setLink("/login");
-      setButtonValue("Sign in/up");
+      setButtonValue("SIGN IN/UP");
     }
-  };
-
-  fetchUser();
-
+    console.log("link", buttonValue);
+  }, [buttonValue]
+  );
+  
   const logInOut = async () => {
-    if (buttonValue === "Sign out") {
+    if (buttonValue === "SIGN OUT") {
       console.log("get logout request");
       await fetch("/logout").then((res) => {
+        localStorage.removeItem("user");
         if (res.redirected) {
-          window.location.href = "/"
+          window.location.href = "/";
         }
       });
     } else {
@@ -34,13 +34,23 @@ const SignInOut = () => {
     }
   };
 
+  const buttonStyle = {
+    background: "none",
+    border: 0,
+  };
+
   return (
     <div className="SignInOut">
       <Link to={link}>
-        <button type="button" className="btn btn-light" onClick={logInOut}>
+        <button
+          type="button"
+          className="btn btn-light"
+          style={buttonStyle}
+          onClick={logInOut}
+        >
           {buttonValue}
         </button>
-      </Link> 
+      </Link>
     </div>
   );
 };

@@ -1,0 +1,15 @@
+.containter {
+  margin-top: 20px;
+  position: relative;
+}
+
+.countsContainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  /*@media smallBP { flex-wrap: wrap; }*/
+}
