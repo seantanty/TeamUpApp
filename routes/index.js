@@ -199,9 +199,15 @@ router.post("/register", async (req, res) => {
 router.post("/getUserByName", async(req, res)=> {
   try {
     const username = req.body.username;
-    const dbRes = await myDB.getUserById(username);
-    console.log(dbRes);
-    res.send(dbRes);
+    const dbRes = await myDB.getUserByName(username);
+    const userInfo = {
+      username: dbRes[0].username,
+      posted: dbRes[0].posted,
+      teamuped: dbRes[0].teamuped,
+      intereted: dbRes[0].interested,
+    };
+    console.log(userInfo);
+    res.send(userInfo);
   } catch (e) {
     console.log("Error", e);
     res.status(400).send({ err: e });
