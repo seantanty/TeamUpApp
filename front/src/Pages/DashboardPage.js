@@ -16,7 +16,7 @@ const DashboardPage = () => {
     const user = localStorage.getItem("user");
     if (user === null) {
       alert("Pleae sign in first!");
-      window.location.href = "/";
+      window.location.href = "/login";
     }
 
     const username = JSON.parse(user).username;

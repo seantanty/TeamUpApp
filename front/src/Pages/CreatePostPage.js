@@ -6,6 +6,12 @@ const CreatePostPage = () => {
   const [cat, setCat] = useState("");
   const [content, setContent] = useState("");
 
+  const user = localStorage.getItem("user");
+  if (user === null) {
+    alert("Pleae sign in first!");
+    window.location.href = "/login";
+  }
+
   const createPost = async (event) => {
     event.preventDefault();
     if (title === "" || cat === "") {
