@@ -6,10 +6,11 @@ import ListPostsUser from "../Components/ListPostsUser.js";
 
 const DashboardPage = () => {
   const [postCount, setPostCount] = useState(0);
-  //const [teamedCount, setTeamedCount] = useState(0);
+  const [teamupCount, setTeamedCount] = useState(0);
   const [interestCount, setInterestCount] = useState(0);
   const [posted, setPosted] = useState([]);
   const [interested, setInterested] = useState([]);
+  const [teamuped, setTeamuped] = useState([]);
 
   useEffect(() => {
     const username = JSON.parse(localStorage.getItem("user")).username;
@@ -30,7 +31,7 @@ const DashboardPage = () => {
         //set counts
         setInterestCount(res.interested.length);
         setPostCount(res.posted.length);
-        //setTeamedCount(res.teamuped.length);
+        setTeamedCount(res.teamuped.length);
 
         //set posts
         const userPosted = res.posted.sort((a, b) =>
@@ -39,9 +40,12 @@ const DashboardPage = () => {
         const userInterested = res.interested.sort((a, b) =>
           Date(a.createdAt) > Date(b.createdAt) ? 1 : -1
         );
-        console.log(userPosted);
+        const userTeamuped = res.teamuped.sort((a, b) =>
+          Date(a.createdAt) > Date(b.createdAt) ? 1 : -1
+        );
         setPosted(userPosted);
         setInterested(userInterested);
+        setTeamuped(userTeamuped);
       } catch (error) {
         console.error(error);
       }
@@ -54,6 +58,7 @@ const DashboardPage = () => {
       <div className="countsContainer">
         <Count label={"posted"} count={postCount} />
         <Count label={"interested"} count={interestCount} />
+        <Count label={"team uped"} count={teamupCount} />
       </div>
 
       <div className="container-fluid mt-100">
@@ -91,6 +96,18 @@ const DashboardPage = () => {
                   </div>
                 </div>
                 <ListPostsUser posts={interested}></ListPostsUser>
+              </div>
+              <div>
+                <div className="card mb-3">
+                  <div className="card-header pr-0 pl-0">
+                    <div className="row no-gutters align-items-center w-100">
+                      <div className="col font-weight-bold pl-3">
+                        Team Uped
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ListPostsUser posts={teamuped}></ListPostsUser>
               </div>
             </div>
           </div>
