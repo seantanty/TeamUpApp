@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="200" height="200">
+    <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="150" height="150">
   </a>
 </p>
 
