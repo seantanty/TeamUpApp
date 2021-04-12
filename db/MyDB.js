@@ -173,13 +173,18 @@ function MyDB() {
   myDB.getPosts = async (query) => {
     let client;
     try {
-      const realQuery = query.query || "";
+      const titleQuery = query.query || "";
+      const catQuery = query.category || "";
+      console.log(catQuery);
+      console.log(query.category);
+      console.log(titleQuery);
+      console.log(query.query);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
       const postsCol = db.collection("posts");
       const posts = await postsCol
-        .find({ title: { $regex: realQuery } })
+        .find({ category: { $regex: catQuery }, title: { $regex: titleQuery } })
         .sort({ createdAt: -1 })
         .toArray();
       return posts;
@@ -204,8 +209,6 @@ function MyDB() {
     }
   };
 
-  //get postByFilter
-
   //edit post
   myDB.editPost = async (post) => {
     let client;
@@ -216,26 +219,6 @@ function MyDB() {
       const postsCol = db.collection("posts");
       //edit the passed in part of the post
       const res = await postsCol.insertOne(post);
-      return res;
-    } finally {
-      client.close();
-    }
-  };
-
-  //delete post, don't actually delete post from db
-  //instead mark post as deleted and don't show
-  myDB.deletePost = async (query) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      const db = client.db(DB_NAME);
-      const postsCol = db.collection("posts");
-      const userCol = db.collection("posts");
-      //remove query.postId from user's post list
-
-      //mark post as deleted
-
       return res;
     } finally {
       client.close();

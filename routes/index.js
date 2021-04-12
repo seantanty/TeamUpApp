@@ -10,10 +10,12 @@ const saltRounds = 10;
 
 router.post("/createPost", async (req, res) => {
   try {
+    console.log(req.body);
     const postObj = {
       userId: req.user._id,
       username: req.user.username,
       title: req.body.title,
+      category: req.body.category,
       content: req.body.content,
       createdAt: new Date(),
       comments: [],

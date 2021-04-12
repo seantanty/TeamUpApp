@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "../styles/navigationbar.css";
-import icon from "../styles/teamup32.png"
+import icon from "../styles/teamup32.png";
 
 const NavigationBar = () => {
   const location = useLocation();
@@ -19,7 +19,8 @@ const NavigationBar = () => {
     <nav className="navbar navbar-expand-lg color-nav">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img id="icon" src={icon} alt="icon"/>TeamUp 
+          <img id="icon" src={icon} alt="icon" />
+          TeamUp
         </Link>
         <button
           className="navbar-toggler"
@@ -65,17 +66,6 @@ const NavigationBar = () => {
                 to="/dashboard"
               >
                 Dashboard
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={
-                  "nav-link" +
-                  (location.pathname === "/testingPage" ? " active" : "")
-                }
-                to="/testingPage"
-              >
-                TestingPage
               </Link>
             </li>
           </ul>

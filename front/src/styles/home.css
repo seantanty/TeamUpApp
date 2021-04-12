@@ -11,18 +11,6 @@ body {
   margin-left: 150px;
 }
 
-.form-control-borderless {
-  border: none;
-}
-
-.form-control-borderless:hover,
-.form-control-borderless:active,
-.form-control-borderless:focus {
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-
 .card {
   box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
     0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
@@ -46,10 +34,6 @@ body {
   padding-right: 0.625rem;
   height: 3.5rem;
   border-bottom: 1px solid rgba(26, 54, 126, 0.125);
-}
-
-#searchBar {
-  padding: 2px;
 }
 
 #searchBarBox {
