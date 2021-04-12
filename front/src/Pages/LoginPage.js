@@ -36,8 +36,8 @@ const LoginPage = () => {
 
   return (
     <div className="container">
-      <div className="card-header">
-        <h3 className="mb-0">Sign in </h3>
+      <div className="card-header" style={{backgroundColor: "#f0ffff"}}>
+        <h3 className="mb-0">Sign in</h3>
       </div>
       <div className="card-body">
         <label className="form-label">

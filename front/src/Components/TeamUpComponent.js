@@ -111,7 +111,8 @@ const TeamUpComponent = (props) => {
       );
     } else {
       return (
-        <button type="button" className="btn btn-secondary" disabled>
+        <button type="button" className="btn btn-secondary" 
+          disabled style={{marginLeft: "10px"}}>
           Team created
         </button>
       );

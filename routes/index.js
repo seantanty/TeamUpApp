@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const myDB = require("../db/MyDB.js");
-var path = require("path");
 const saltRounds = 10;
 
 //This is the key GET route to work with react

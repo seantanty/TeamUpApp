@@ -58,7 +58,7 @@ const RegisterPage = () => {
 
   return (
     <div className="container">
-      <div className="card-header">
+      <div className="card-header" style={{backgroundColor: "#f0ffff"}}>
         <h3 className="mb-0">Sign up</h3>
       </div>
 
