@@ -174,7 +174,7 @@ function MyDB() {
   };
 
   //get postById
-  myDB.getPostByName = async (query) => {
+  myDB.getPostById = async (query) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
