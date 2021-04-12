@@ -16,7 +16,7 @@ A teamup forum app serving students to convenientyly form teams to study, play a
 1. [Project Objective](#project-objective)
 2. [Screenshots](#screenshots)
 3. [Technologies](#technologies)
-4. [Setup for Development](#Setup for Development)
+4. [Setup for Development](#setup-for-development)
 
 ### Project Objective
 ***
