@@ -1,4 +1,5 @@
-.color-nav, .navbar-nav{
+.color-nav,
+.navbar-nav {
   background-color: #f0ffff;
   height: 50px;
 }
@@ -9,8 +10,7 @@
 }
 
 .navbar-toggler {
-  border-color:  #808080;
+  border-color: #808080;
   background-color: #ffffff;
-  color: #808080 ;
+  color: #808080;
 }
-

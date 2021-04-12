@@ -6,17 +6,13 @@ let regExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)
 const RegisterPage = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  
-  async function register () {
+
+  async function register() {
     console.log("username", username);
     console.log("password", password);
-  
+    // check valid username and password first
     if (username.match(regExp)) {
-      if (
-        password === null ||
-        password === "" ||
-        password === undefined
-      ) {
+      if (password === null || password === "" || password === undefined) {
         alert("Please enter your password.");
         console.log("stay here");
         return false;
@@ -29,17 +25,17 @@ const RegisterPage = () => {
           body: JSON.stringify({ username: username }),
         });
         const res = await resRaw.json();
+        // check registered
         if (res.same === true) {
           alert("This email has been registered already.");
           console.log("stay here");
           return false;
         } else {
-          console.log("pass all front tests");
-
+          // register
           await fetch("/register", {
             method: "POST",
             headers: {
-              "Accept": "application/json",
+              Accept: "application/json",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -51,17 +47,15 @@ const RegisterPage = () => {
               console.log(response.url);
               window.location.href = response.url;
             }
-        });
-        
+          });
         }
       }
     } else {
       alert("Please enter a valid e-mail address.");
       return false;
     }
-    
   }
-  
+
   return (
     <div className="container">
       <div className="card-header">
@@ -78,7 +72,7 @@ const RegisterPage = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
         </label>
-        <br /> 
+        <br />
         <label className="form-label">
           Password
           <input
@@ -97,9 +91,8 @@ const RegisterPage = () => {
         <p className="message">
           Registered Already? <Link to="/login">Sign in</Link>
         </p>
-
+      </div>
     </div>
-  </div>
   );
 };
 

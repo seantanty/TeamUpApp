@@ -18,6 +18,7 @@ const LoginPage = () => {
       }),
     });
 
+    // check login status and rediect
     console.log("redirected?", resRaw.redirected);
     if (resRaw.redirected) {
       alert("Incorrect username or password!");
@@ -27,11 +28,10 @@ const LoginPage = () => {
         username: username,
         userid: res.userid,
       });
+      // save user info to local storage
       localStorage.setItem("user", userInfo);
       window.location.href = "/";
     }
-    
-      
   };
 
   return (

@@ -44,7 +44,6 @@ const ListPostsUser = (props) => {
 
 ListPostsUser.propTypes = {
   posts: PropTypes.array.isRequired,
-  //label: PropTypes.string,
 };
 
 export default ListPostsUser;

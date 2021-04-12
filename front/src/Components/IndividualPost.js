@@ -62,13 +62,17 @@ function IndividualPost(props) {
                   </div>
                 </div>
               </div>
-              <div className="bg-white">
-                <div className="d-flex flex-row fs-12">
+              <div className="form-group" style={{ marginLeft: "0px" }}>
+                <div className="interactions">
                   <LikeButton post={post}></LikeButton>
                   <button
                     type="button"
                     className="btn btn-outline-primary"
-                    style={{ marginLeft: "5px" }}
+                    style={{
+                      marginLeft: "10px",
+                      color: "#ffffff",
+                      height: "36px",
+                    }}
                     onClick={clickComment}
                   >
                     <i className="fa fa-commenting-o"></i>

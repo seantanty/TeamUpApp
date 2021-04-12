@@ -1,0 +1,9 @@
+#likebtn {
+  border: none;
+  color: #ffffff;
+  float: left;
+}
+
+#likebtn:hover {
+  color: #ff0000;
+}

@@ -6,6 +6,7 @@ const SignInOut = () => {
   const [buttonValue, setButtonValue] = useState("SIGN IN/UP");
 
   useEffect(() => {
+    //get user info from local storage
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
     console.log("Got user", loggedInUser);
 

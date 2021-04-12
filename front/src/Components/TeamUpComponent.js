@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../styles/teamup.css";
 
 const TeamUpComponent = (props) => {
   const { post, userid } = props;

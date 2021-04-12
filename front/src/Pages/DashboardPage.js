@@ -58,7 +58,7 @@ const DashboardPage = () => {
       <div className="countsContainer">
         <Count label={"posted"} count={postCount} />
         <Count label={"interested"} count={interestCount} />
-        <Count label={"team uped"} count={teamupCount} />
+        <Count label={"teamuped"} count={teamupCount} />
       </div>
 
       <div className="container-fluid mt-100">
@@ -101,9 +101,7 @@ const DashboardPage = () => {
                 <div className="card mb-3">
                   <div className="card-header pr-0 pl-0">
                     <div className="row no-gutters align-items-center w-100">
-                      <div className="col font-weight-bold pl-3">
-                        Team Uped
-                      </div>
+                      <div className="col font-weight-bold pl-3">TeamUped</div>
                     </div>
                   </div>
                 </div>
