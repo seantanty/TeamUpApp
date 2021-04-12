@@ -7,14 +7,14 @@ var path = require("path");
 const saltRounds = 10;
 
 //This is the key GET route to work with react
-router.get("*", (req, res) =>
-  res.sendFile(path.resolve("front", "build", "index.html"))
-);
+// router.get("*", (req, res) =>
+//   res.sendFile(path.resolve("front", "build", "index.html"))
+// );
 
 // index GET
-router.get("/", function (req, res) {
-  res.sendFile(path.resolve(__dirname), "front/build", "index.html");
-});
+// router.get("/", function (req, res) {
+//   res.sendFile(path.resolve(__dirname), "front/build", "index.html");
+// });
 
 /* Post related section */
 router.post("/createPost", async (req, res) => {
