@@ -17,7 +17,7 @@ function MyDB() {
       const db = client.db(DB_NAME);
       const postsCol = db.collection("posts");
       const u_id = new ObjectId(post.userId);
-      //plan to add a post backend verification
+
       const res1 = await postsCol.insertOne(post);
       const p_id = new ObjectId(res1.ops[0]._id);
       const res2 = await db.collection("Users").updateOne(
@@ -41,6 +41,8 @@ function MyDB() {
   myDB.getPosts = async (query) => {
     let client;
     try {
+      console.log(query.query);
+      console.log(query.category);
       const titleQuery = query.query || "";
       const catQuery = query.category || "";
       client = new MongoClient(url, { useUnifiedTopology: true });

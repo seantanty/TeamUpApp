@@ -16,9 +16,16 @@ function HomePage() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const resRaw = await fetch(
-          `./getPosts?category=${cat}&query=${query}&page=${page}`
-        );
+        const resRaw = await fetch("/getPosts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ category: cat, query: query, page: page }),
+        });
+        // const resRaw = await fetch(
+        //   `./getPosts?category=${cat}&query=${query}&page=${page}`
+        // );
         const res = await resRaw.json();
         setPosts(res.posts);
         setTotal(res.total);
@@ -27,7 +34,7 @@ function HomePage() {
       }
     };
     getPosts();
-  }, [page, query, cat]);
+  }, [page, reload, query, cat]);
 
   return (
     <div className="container" id="container">
@@ -53,6 +60,7 @@ function HomePage() {
               className="form-control"
               type="text"
               placeholder="Search topics or keywords"
+              id="searchInput"
               onChange={(evt) => {
                 setQuery(evt.target.value);
               }}
@@ -86,7 +94,7 @@ function HomePage() {
                 <div className="row no-gutters align-items-center w-100">
                   <div className="col-md-2 font-weight-bold pl-3">Category</div>
                   <div className="col font-weight-bold pl-3">Titles</div>
-                  <div className="d-none d-md-block col-4 text-muted">
+                  <div className="d-none d-md-block col-6 text-muted">
                     <div className="row no-gutters align-items-center">
                       <div className="col-4">Replies</div>
                       <div className="col-8">Last update</div>
@@ -99,13 +107,13 @@ function HomePage() {
           </div>
         </div>
       </div>
-
-      <PaginationComponent
-        className="Pagination"
-        total={total}
-        page={page}
-        onChangePage={setPage}
-      ></PaginationComponent>
+      <div className="Pagination">
+        <PaginationComponent
+          total={total}
+          page={page}
+          onChangePage={setPage}
+        ></PaginationComponent>
+      </div>
     </div>
   );
 }

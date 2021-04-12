@@ -11,7 +11,7 @@ router.get("*", (req, res) =>
   res.sendFile(path.resolve("front", "build", "index.html"))
 );
 
-//index GET
+// index GET
 router.get("/", function (req, res) {
   res.sendFile(path.resolve(__dirname), "front/build", "index.html");
 });
@@ -19,6 +19,7 @@ router.get("/", function (req, res) {
 /* Post related section */
 router.post("/createPost", async (req, res) => {
   try {
+    console.log("create post");
     const postObj = {
       userId: req.user._id,
       username: req.user.username,
@@ -40,11 +41,12 @@ router.post("/createPost", async (req, res) => {
   }
 });
 
-router.get("/getPosts", async (req, res) => {
+router.post("/getPosts", async (req, res) => {
   try {
+    console.log(req.body);
     const nPerPage = 12;
-    const page = +req.query.page || 0;
-    const dbRes = await myDB.getPosts(req.query);
+    const page = +req.body.page || 0;
+    const dbRes = await myDB.getPosts(req.body);
     res.send({
       posts: dbRes.slice(page * nPerPage, (page + 1) * nPerPage),
       total: dbRes.length,
@@ -133,7 +135,6 @@ router.get("/getComments", async (req, res) => {
 /* Comment related section */
 
 /* Auth related section */
-
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
@@ -141,7 +142,6 @@ router.post(
     console.log("successful login");
     console.log("userid", req.user._id);
     res.send({ userid: req.user._id });
-    //res.redirect("/");
   }
 );
 
@@ -187,7 +187,9 @@ router.post("/register", async (req, res) => {
     res.status(400).send({ err: e });
   }
 });
+/* Auth related section */
 
+/* User related section */
 router.post("/getUserByName", async (req, res) => {
   try {
     const username = req.body.username;
@@ -213,5 +215,6 @@ router.get("/getUser", (req, res) =>
     interested: req.user ? req.user.interested : null,
   })
 );
+/* User related section */
 
 module.exports = router;
