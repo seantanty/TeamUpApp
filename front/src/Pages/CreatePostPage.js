@@ -32,9 +32,7 @@ const CreatePostPage = () => {
           <h1>Create Post</h1>
           <form action="">
             <div className="form-group">
-              <label for="title">
-                Title <span className="require">*</span>
-              </label>
+              <label>Title</label>
               <input
                 type="text"
                 className="form-control"
@@ -44,19 +42,13 @@ const CreatePostPage = () => {
             </div>
 
             <div className="form-group">
-              <label for="description">Description</label>
+              <label>Description</label>
               <textarea
                 rows="5"
                 className="form-control"
                 name="description"
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
-            </div>
-
-            <div className="form-group">
-              <p>
-                <span className="require">*</span> - required fields
-              </p>
             </div>
 
             <div className="form-group">

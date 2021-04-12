@@ -29,14 +29,14 @@ const DashboardPage = () => {
         const res = await resRaw.json();
         console.log("res", res);
         //set counts
-        setInterestCount(res.intereted.length);
+        setInterestCount(res.interested.length);
         setPostCount(res.posted.length);
         //setTeamedCount(res.teamuped.length);
         //set posts
         const userPosted = res.posted.sort((a, b) =>
           a.createdAt > b.createdAt ? -1 : 1
         );
-        const userInterested = res.intereted.sort((a, b) =>
+        const userInterested = res.interested.sort((a, b) =>
           a.createdAt > b.createdAt ? -1 : 1
         );
         console.log(userPosted);
@@ -53,7 +53,7 @@ const DashboardPage = () => {
     <div className="containter">
       <div className="countsContainer">
         <Count label={"posted"} count={postCount} />
-        <Count label={"intereted"} count={interestCount} />
+        <Count label={"interested"} count={interestCount} />
       </div>
 
       <div className="container-fluid mt-100">
@@ -72,9 +72,9 @@ const DashboardPage = () => {
               </div>
               <div>
                 <div className="card mb-3">
-                  <div className="card-header pr-0 pl-0">  
+                  <div className="card-header pr-0 pl-0">
                     <div className="row no-gutters align-items-center w-100">
-                        <div className="col font-weight-bold pl-3">Posted</div>
+                      <div className="col font-weight-bold pl-3">Posted</div>
                     </div>
                   </div>
                 </div>
@@ -82,9 +82,11 @@ const DashboardPage = () => {
               </div>
               <div>
                 <div className="card mb-3">
-                  <div className="card-header pr-0 pl-0">  
+                  <div className="card-header pr-0 pl-0">
                     <div className="row no-gutters align-items-center w-100">
-                        <div className="col font-weight-bold pl-3">Interested</div>
+                      <div className="col font-weight-bold pl-3">
+                        Interested
+                      </div>
                     </div>
                   </div>
                 </div>

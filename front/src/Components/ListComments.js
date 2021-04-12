@@ -5,29 +5,40 @@ import "../styles/listcomments.css";
 const ListComments = (props) => {
   const { comments } = props;
 
-  const renderComments = () => {
-    let res = [];
-    let i = 0;
-    for (let c of comments) {
-      let commentDate = new Date(c.createdAt);
-      let dateToShow = commentDate.toLocaleString();
-      res.push(
-        <div className="comment-item active" key={"Comments" + i}>
-          <div className="comment mt-4 text-justify float-left"></div>
-          <div className="comment card p-3 mt-2">
-            <h5>{c.username}</h5> <span>{dateToShow}</span> <br />
-            <p>{c.content}</p>
-          </div>
+  if (comments !== null && comments !== undefined) {
+    if (comments.length && comments.length > 0) {
+      const renderComments = () => {
+        let res = [];
+        let i = 0;
+        for (let c of comments) {
+          let commentDate = new Date(c.createdAt);
+          let dateToShow = commentDate.toLocaleString();
+          res.push(
+            <div className="comment-item active" key={"Comments" + i}>
+              <div className="comment mt-4 text-justify float-left"></div>
+              <div className="comment card p-3 mt-2">
+                <h5>{c.username}</h5> <span>{dateToShow}</span> <br />
+                <p>{c.content}</p>
+              </div>
+            </div>
+          );
+          i += 1;
+        }
+        return res;
+      };
+
+      return (
+        <div className="bg-white p-2">
+          <h4>Comments:</h4>
+          <div className="ListComments">{renderComments()}</div>
         </div>
       );
-      i += 1;
+    } else {
+      return <div></div>;
     }
-    return res;
-
-    // return movies.map((m, i) => <div key={"Movie" + i}>{m.title}</div>);
-  };
-
-  return <div className="ListComments">{renderComments()}</div>;
+  } else {
+    return <div></div>;
+  }
 };
 
 ListComments.propTypes = {

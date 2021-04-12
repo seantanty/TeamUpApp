@@ -10,7 +10,6 @@ const saltRounds = 10;
 
 router.post("/createPost", async (req, res) => {
   try {
-    console.log(new Date());
     const postObj = {
       userId: req.user._id,
       username: req.user.username,
@@ -18,7 +17,7 @@ router.post("/createPost", async (req, res) => {
       content: req.body.content,
       createdAt: new Date(),
       comments: [],
-      intereted: [],
+      interested: [],
       open: true,
       lastUpdated: new Date(),
     };
@@ -62,7 +61,6 @@ router.post("/getPostById", async (req, res) => {
 
 router.post("/createComment", async (req, res) => {
   try {
-    console.log(new Date());
     const commentObj = {
       comment: req.body.comment,
       createdAt: new Date(),
@@ -80,9 +78,19 @@ router.post("/createComment", async (req, res) => {
   }
 });
 
-router.post("/expressInterest", async (req, res) => {
+router.post("/likePost", async (req, res) => {
   try {
-    const dbRes = await myDB.expressInterest(req.user._id, req.body.postId);
+    const dbRes = await myDB.likePost(req.user._id, req.body.post);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/unlikePost", async (req, res) => {
+  try {
+    const dbRes = await myDB.unlikePost(req.user._id, req.body.postId);
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
@@ -93,7 +101,6 @@ router.post("/expressInterest", async (req, res) => {
 router.get("/getComments", async (req, res) => {
   try {
     const dbRes = await myDB.getComments(req.query);
-    console.log(dbRes);
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
@@ -136,12 +143,10 @@ router.post(
   function (req, res) {
     console.log("successful login");
     console.log("userid", req.user._id);
-    res.send({userid: req.user._id});
+    res.send({ userid: req.user._id });
     //res.redirect("/");
   }
 );
-
-
 
 //logout GET
 /*
@@ -179,7 +184,7 @@ router.post("/register", async (req, res) => {
       password: hashedPwd,
       posted: [],
       teamuped: [],
-      intereted: [],
+      interested: [],
     };
 
     const dbRes = await myDB.createUser(userObj);
@@ -196,7 +201,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/getUserByName", async(req, res)=> {
+router.post("/getUserByName", async (req, res) => {
   try {
     const username = req.body.username;
     const dbRes = await myDB.getUserByName(username);
@@ -204,9 +209,8 @@ router.post("/getUserByName", async(req, res)=> {
       username: dbRes[0].username,
       posted: dbRes[0].posted,
       teamuped: dbRes[0].teamuped,
-      intereted: dbRes[0].interested,
+      interested: dbRes[0].interested,
     };
-    console.log(userInfo);
     res.send(userInfo);
   } catch (e) {
     console.log("Error", e);
@@ -220,7 +224,7 @@ router.get("/getUser", (req, res) =>
     username: req.user ? req.user.username : null,
     posted: req.user ? req.user.posted : null,
     teamuped: req.user ? req.user.teamuped : null,
-    intereted: req.user ? req.user.interested : null,
+    interested: req.user ? req.user.interested : null,
   })
 );
 

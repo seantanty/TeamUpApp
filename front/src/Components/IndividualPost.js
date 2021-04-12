@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ListComments from "../Components/ListComments.js";
 import CommentBox from "../Components/CommentBox.js";
+import LikeButton from "../Components/LikeButton.js";
 
 function IndividualPost(props) {
   const { state } = useLocation();
@@ -12,6 +13,7 @@ function IndividualPost(props) {
   function clickComment() {
     setdisplayCommentBox(!displayCommentBox);
   }
+
   function convertDate(dateString) {
     let postDate = new Date(dateString);
     return postDate.toLocaleString();
@@ -59,10 +61,7 @@ function IndividualPost(props) {
               </div>
               <div className="bg-white">
                 <div className="d-flex flex-row fs-12">
-                  <button type="button" className="btn btn-outline-danger">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="ml-1">Like</span>
-                  </button>
+                  <LikeButton post={post}></LikeButton>
                   <button
                     type="button"
                     className="btn btn-outline-primary"
@@ -75,10 +74,7 @@ function IndividualPost(props) {
                 </div>
               </div>
               <CommentBox display={displayCommentBox} post={post}></CommentBox>
-              <div className="bg-white p-2">
-                <h4>Comments:</h4>
-                <ListComments comments={comments}></ListComments>
-              </div>
+              <ListComments comments={comments}></ListComments>
             </div>
           </div>
         </div>

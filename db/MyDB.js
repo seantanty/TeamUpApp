@@ -30,6 +30,7 @@ function MyDB() {
       const postsCol = db.collection("posts");
       //need to add a post backend verification
       const res = await postsCol.insertOne(post);
+      //add post to user
       return res;
     } finally {
       client.close();
@@ -67,11 +68,11 @@ function MyDB() {
     }
   };
 
-  myDB.expressInterest = async (userId, postId) => {
+  myDB.likePost = async (userId, post) => {
     let client;
     try {
       const u_id = new ObjectId(userId);
-      const p_id = new ObjectId(postId);
+      const p_id = new ObjectId(post._id);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
@@ -91,7 +92,9 @@ function MyDB() {
         {
           $push: {
             interested: {
-              userId: p_id,
+              _id: p_id,
+              title: post.title,
+              createdAt: new Date(),
             },
           },
         }
@@ -102,7 +105,7 @@ function MyDB() {
     }
   };
 
-  myDB.unInterest = async (userId, postId) => {
+  myDB.unlikePost = async (userId, postId) => {
     let client;
     try {
       const u_id = new ObjectId(userId);
@@ -126,7 +129,7 @@ function MyDB() {
         {
           $pull: {
             interested: {
-              userId: p_id,
+              post_id: p_id,
             },
           },
         }
@@ -141,7 +144,6 @@ function MyDB() {
   myDB.getComments = async (query) => {
     let client;
     try {
-      console.log(query);
       const p_id = new ObjectId(query);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
@@ -174,7 +176,7 @@ function MyDB() {
   };
 
   //get postById
-  myDB.getPostByName = async (query) => {
+  myDB.getPostById = async (query) => {
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
@@ -316,7 +318,7 @@ function MyDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const userCol = db.collection("Users");
-      const data = await userCol.find({username:query}).toArray();
+      const data = await userCol.find({ username: query }).toArray();
       return data;
     } finally {
       client.close();
