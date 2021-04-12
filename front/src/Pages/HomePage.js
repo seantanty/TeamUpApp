@@ -27,7 +27,7 @@ function HomePage() {
       }
     };
     getPosts();
-  }, [page, query]);
+  }, [page, query, cat]);
 
   return (
     <div className="container" id="container">
