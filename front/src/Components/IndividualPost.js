@@ -86,6 +86,7 @@ function IndividualPost(props) {
                 </div>
               </div>
               <CommentBox display={displayCommentBox} post={post}></CommentBox>
+              <br /> <br />
               <TeamList
                 username={curUsername}
                 teamMembers={post.groupMember}

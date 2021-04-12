@@ -29,7 +29,7 @@ const ListComments = (props) => {
 
       return (
         <div className="bg-white p-2">
-          <h4>Comments:</h4>
+          <h5>Comments:</h5>
           <div className="ListComments">{renderComments()}</div>
         </div>
       );

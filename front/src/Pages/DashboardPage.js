@@ -13,7 +13,13 @@ const DashboardPage = () => {
   const [teamuped, setTeamuped] = useState([]);
 
   useEffect(() => {
-    const username = JSON.parse(localStorage.getItem("user")).username;
+    const user = localStorage.getItem("user");
+    if (user === null) {
+      alert("Pleae sign in first!");
+      window.location.href = "/";
+    }
+
+    const username = JSON.parse().username;
 
     const getUser = async () => {
       try {
