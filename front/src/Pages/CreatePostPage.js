@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 
+import "../styles/post.css";
+
 const CreatePostPage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -31,13 +33,15 @@ const CreatePostPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" id="postContainer">
       <div className="row">
         <div className="col-md-8 col-md-offset-2">
-          <h1>Create Post</h1>
           <form action="">
             <div className="form-group">
-              <label>Title</label>
+              <label for="title">
+               Title *
+              </label>
+          
               <input
                 type="text"
                 className="form-control"
@@ -55,16 +59,24 @@ const CreatePostPage = () => {
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>
-
+  
+              <p>
+                <br />
+                <span className="require">*</span> - required fields
+              </p>
+            
             <div className="form-group">
               <button
                 type="submit"
                 className="btn btn-primary"
                 onClick={createPost}
+                id="createPost"
               >
                 Create
               </button>
-              <button className="btn btn-default">Cancel</button>
+              <button className="btn btn-default" id="cancel">
+                Cancel
+              </button>
             </div>
           </form>
         </div>

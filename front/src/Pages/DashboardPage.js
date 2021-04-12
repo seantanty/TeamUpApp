@@ -13,7 +13,6 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const username = JSON.parse(localStorage.getItem("user")).username;
-    //console.log("username", username);
 
     const getUser = async () => {
       try {
@@ -32,6 +31,7 @@ const DashboardPage = () => {
         setInterestCount(res.interested.length);
         setPostCount(res.posted.length);
         //setTeamedCount(res.teamuped.length);
+        
         //set posts
         const userPosted = res.posted.sort((a, b) =>
           a.createdAt > b.createdAt ? -1 : 1
@@ -63,7 +63,7 @@ const DashboardPage = () => {
               <div className="card-header pr-0 pl-0">
                 <div className="row no-gutters align-items-center w-100">
                   <div className="col font-weight-bold pl-3">Titles</div>
-                  <div className="d-none d-md-block col-5 text-muted">
+                  <div className="d-none d-md-block col-6 text-muted">
                     <div className="row no-gutters align-items-center">
                       <div className="col-6">Last update</div>
                     </div>

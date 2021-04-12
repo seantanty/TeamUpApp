@@ -27,8 +27,8 @@ function HomePage() {
   }, [reload, page]);
 
   return (
-    <div className="container">
-      <div className="col-12 col-md-10 col-lg-8" style={{ margin: "0 auto" }}>
+    <div className="container" id="container">
+      <div className="col-12 col-md-10 col-lg-8" style={{ margin: "0" }}>
         <div className="card card-sm" id="searchBarBox">
           <div
             className="card-body row no-gutters align-items-center"
@@ -72,14 +72,14 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <div className="container-fluid mt-100">
+      <div className="container mt-100">
         <div className="row">
           <div className="col-md-10">
-            <div className="card mb-3">
+            <div className="card mb-3" id="posts card">
               <div className="card-header pr-0 pl-0">
                 <div className="row no-gutters align-items-center w-100">
                   <div className="col font-weight-bold pl-3">Titles</div>
-                  <div className="d-none d-md-block col-4 text-muted">
+                  <div className="d-none d-md-block col-8 text-muted">
                     <div className="row no-gutters align-items-center">
                       <div className="col-4">Replies</div>
                       <div className="col-8">Last update</div>
@@ -93,7 +93,7 @@ function HomePage() {
         </div>
       </div>
 
-      <PaginationComponent
+      <PaginationComponent className="Pagination"
         total={total}
         page={page}
         onChangePage={setPage}
