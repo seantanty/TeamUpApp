@@ -19,7 +19,7 @@ const DashboardPage = () => {
       window.location.href = "/";
     }
 
-    const username = JSON.parse().username;
+    const username = JSON.parse(user).username;
 
     const getUser = async () => {
       try {

@@ -44,22 +44,22 @@ const NavigationBar = () => {
               <Link
                 className={
                   "nav-link" +
-                  (location.pathname === "/dashboard" ? " active" : "")
+                  (location.pathname === "/createPost" ? " active" : "")
                 }
-                to="/dashboard"
+                to="/createPost"
               >
-                Dashboard
+                Write a post
               </Link>
             </li>
             <li className="nav-item">
               <Link
                 className={
                   "nav-link" +
-                  (location.pathname === "/createPost" ? " active" : "")
+                  (location.pathname === "/dashboard" ? " active" : "")
                 }
-                to="/createPost"
+                to="/dashboard"
               >
-                <img id="write" src={write} alt="write a post" height="25" />
+                Dashboard
               </Link>
             </li>
           </ul>
