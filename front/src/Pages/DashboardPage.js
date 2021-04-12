@@ -13,7 +13,6 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const username = JSON.parse(localStorage.getItem("user")).username;
-    //console.log("username", username);
 
     const getUser = async () => {
       try {
@@ -32,6 +31,7 @@ const DashboardPage = () => {
         setInterestCount(res.intereted.length);
         setPostCount(res.posted.length);
         //setTeamedCount(res.teamuped.length);
+        
         //set posts
         const userPosted = res.posted.sort((a, b) =>
           a.createdAt > b.createdAt ? -1 : 1
@@ -53,7 +53,7 @@ const DashboardPage = () => {
     <div className="containter">
       <div className="countsContainer">
         <Count label={"posted"} count={postCount} />
-        <Count label={"intereted"} count={interestCount} />
+        <Count label={"interested"} count={interestCount} />
       </div>
 
       <div className="container-fluid mt-100">

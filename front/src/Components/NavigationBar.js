@@ -1,6 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import "../styles/navigationbar.css";
+import icon from "../styles/teamup32.png"
+
 const NavigationBar = () => {
   const location = useLocation();
   console.log("Render NavigationBar", location);
@@ -13,10 +16,10 @@ const NavigationBar = () => {
   */
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg color-nav">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Team Up
+          <img id="icon" src={icon} alt="icon"/>TeamUp 
         </Link>
         <button
           className="navbar-toggler"
@@ -26,7 +29,6 @@ const NavigationBar = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          //style={buttonStyle}
         >
           <span className="navbar-toggler-icon"></span>
         </button>

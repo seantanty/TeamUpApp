@@ -1,0 +1,15 @@
+.form-group{
+  margin-top: 50px;
+  margin-left: 175px;
+}
+
+.require {margin-left: 175px;}
+
+#createPost {
+  float: left;
+}
+
+#cancel {
+  float: right;
+  color: #ffffff;
+}

@@ -7,8 +7,8 @@ import "../styles/header.css"
 const Header = () => {
   return (
     <div className="headerBody">
-      <NavigationBar></NavigationBar>
-      <SignInOut></SignInOut>
+      <NavigationBar className="navbar"></NavigationBar>
+      <SignInOut className="signinout"></SignInOut>
     </div>
   );
 };

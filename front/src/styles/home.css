@@ -3,7 +3,12 @@ body {
   line-height: 1.5;
   color: #495057;
   text-align: left;
-  background-color: #eef1f3;
+  background-color: #f0ffff;
+}
+
+#container {
+  background-color: #ffffff;
+  margin-left: 150px;
 }
 
 .form-control-borderless {
@@ -25,6 +30,11 @@ body {
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
   border-width: 0;
   transition: all 0.2s;
+  /*background-color: #f0ffff;*/
+}
+
+#postsCard {
+  background-color: #f0ffff;
 }
 
 .card-header {
@@ -35,7 +45,6 @@ body {
   padding-bottom: 0;
   padding-right: 0.625rem;
   height: 3.5rem;
-  background-color: #fff;
   border-bottom: 1px solid rgba(26, 54, 126, 0.125);
 }
 
@@ -46,4 +55,17 @@ body {
 #searchBarBox {
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 150px;
+}
+
+.btn {
+  background-color: #1e90ff;
+}
+
+.btn:hover {
+  background-color: #4169e1;
+}
+
+.Pagination {
+  margin-left: 180px;
 }
