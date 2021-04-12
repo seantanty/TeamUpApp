@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img src="https://i.imgur.com/oeLf3bn.png" alt="TeamUp logo" width="200" height="165">
+    <img src="" alt="TeamUp logo" width="200" height="165">
   </a>
 </p>
 
@@ -51,10 +51,15 @@ If you would like to explore the app, install nodejs (https://nodejs.org/en/down
 In Your directory\TeamUpApp\
 $ yarn install\
 $ yarn start\
+
 In Your directory\TeamUpApp\front\
 $ yarn install\
 $ yarn start\
-go to localhost:3000 and enjoy!
+go to localhost:3000 and enjoy!\
+Or you can\
+$ yarn build\
+go to localhost:3001 and enjoy!\
+
 
 
 
