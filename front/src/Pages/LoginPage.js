@@ -18,13 +18,11 @@ const LoginPage = () => {
       }),
     });
 
-    console.log("resRaw", resRaw);
     console.log("redirected?", resRaw.redirected);
     if (resRaw.redirected) {
       alert("Incorrect username or password!");
     } else {
       const res = await resRaw.json();
-      console.log("result", res);
       const userInfo = JSON.stringify({
         username: username,
         userid: res.userid,

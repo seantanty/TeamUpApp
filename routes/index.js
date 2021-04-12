@@ -129,6 +129,7 @@ router.get("/", function (req, res) {
 });
 
 //login POST
+
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
@@ -139,6 +140,8 @@ router.post(
     //res.redirect("/");
   }
 );
+
+
 
 //logout GET
 /*
@@ -193,12 +196,25 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/getUserByName", async(req, res)=> {
+  try {
+    const username = req.body.username;
+    const dbRes = await myDB.getUserById(username);
+    console.log(dbRes);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
 //route to get user info
 router.get("/getUser", (req, res) =>
   res.send({
     username: req.user ? req.user.username : null,
     posted: req.user ? req.user.posted : null,
     teamuped: req.user ? req.user.teamuped : null,
+    intereted: req.user ? req.user.interested : null,
   })
 );
 

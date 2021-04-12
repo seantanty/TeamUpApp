@@ -309,6 +309,20 @@ function MyDB() {
     }
   };
 
+  myDB.getUserByName = async (query) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const userCol = db.collection("Users");
+      const data = await userCol.find({username:query}).toArray();
+      return data;
+    } finally {
+      client.close();
+    }
+  };
+
   //below code are from previous project, use as reference
 
   // Get popular puzzles for displaying leader boards.
