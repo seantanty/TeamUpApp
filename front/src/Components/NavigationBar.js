@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import "../styles/navigationbar.css";
 import icon from "../styles/teamup32.png";
+import write from "../styles/write.png";
 
 const NavigationBar = () => {
   const location = useLocation();
@@ -43,22 +44,22 @@ const NavigationBar = () => {
               <Link
                 className={
                   "nav-link" +
-                  (location.pathname === "/createPost" ? " active" : "")
+                  (location.pathname === "/dashboard" ? " active" : "")
                 }
-                to="/createPost"
+                to="/dashboard"
               >
-                Write a Post
+                Dashboard
               </Link>
             </li>
             <li className="nav-item">
               <Link
                 className={
                   "nav-link" +
-                  (location.pathname === "/dashboard" ? " active" : "")
+                  (location.pathname === "/createPost" ? " active" : "")
                 }
-                to="/dashboard"
+                to="/createPost"
               >
-                Dashboard
+                <img id="write" src={write} alt="write a post" height="25" />
               </Link>
             </li>
           </ul>
