@@ -25,7 +25,7 @@ const ListPostsUser = (props) => {
                   <p className="forum-item-title">{p.title}</p>
                 </Link>
               </div>
-              <div className="d-none d-md-block col-5">
+              <div className="d-none d-md-block col-6">
                 <div className="row no-gutters align-items-center">
                   <div className="col-6">{dateToShow}</div>
                 </div>
