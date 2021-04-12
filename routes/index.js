@@ -22,6 +22,7 @@ router.post("/createPost", async (req, res) => {
       interested: [],
       open: true,
       lastUpdated: new Date(),
+      groupMember: [],
     };
     const dbRes = await myDB.createPost(postObj);
     res.send({ p_id: dbRes.p_id });
@@ -78,7 +79,11 @@ router.post("/createComment", async (req, res) => {
 
 router.post("/likePost", async (req, res) => {
   try {
-    const dbRes = await myDB.likePost(req.user._id, req.body.post);
+    const dbRes = await myDB.likePost(
+      req.user._id,
+      req.user.username,
+      req.body.post
+    );
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
@@ -99,6 +104,17 @@ router.post("/unlikePost", async (req, res) => {
 router.get("/getComments", async (req, res) => {
   try {
     const dbRes = await myDB.getComments(req.query);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/createTeam", async (req, res) => {
+  try {
+    console.log(req.body.teamMembers);
+    const dbRes = await myDB.createTeam(req.body.post, req.body.teamMembers);
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
@@ -211,13 +227,6 @@ router.get("/getUser", (req, res) =>
     interested: req.user ? req.user.interested : null,
   })
 );
-
-
-
-
-
-
-
 
 //profile GET
 router.get("/profile", loggedIn, function (req, res) {

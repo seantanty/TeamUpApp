@@ -81,7 +81,7 @@ function MyDB() {
     }
   };
 
-  myDB.likePost = async (userId, post) => {
+  myDB.likePost = async (userId, username, post) => {
     let client;
     try {
       const u_id = new ObjectId(userId);
@@ -96,6 +96,7 @@ function MyDB() {
           $push: {
             interested: {
               userId: u_id,
+              username: username,
             },
           },
         }
@@ -153,6 +154,43 @@ function MyDB() {
     }
   };
 
+  myDB.createTeam = async (post, teamMembers) => {
+    let client;
+    try {
+      console.log(teamMembers);
+      const p_id = new ObjectId(post._id);
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      //need to add a post backend verification
+      const res1 = await db.collection("posts").updateOne(
+        { _id: p_id },
+        {
+          $set: {
+            groupMember: teamMembers,
+            open: false,
+          },
+        }
+      );
+
+      const res2 = await db.collection("Users").updateMany(
+        { username: { $in: teamMembers } },
+        {
+          $push: {
+            teamuped: {
+              _id: p_id,
+              title: post.title,
+              createdAt: post.createdAt,
+            },
+          },
+        }
+      );
+      return { res1, res2 };
+    } finally {
+      client.close();
+    }
+  };
+
   //get comments
   myDB.getComments = async (query) => {
     let client;
@@ -175,10 +213,6 @@ function MyDB() {
     try {
       const titleQuery = query.query || "";
       const catQuery = query.category || "";
-      console.log(catQuery);
-      console.log(query.category);
-      console.log(titleQuery);
-      console.log(query.query);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);

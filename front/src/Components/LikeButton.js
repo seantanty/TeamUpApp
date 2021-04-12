@@ -50,28 +50,32 @@ const LikeButton = (props) => {
     });
   };
 
-  if (!like) {
-    return (
-      <button
-        type="button"
-        className="btn btn-outline-danger"
-        onClick={likePost}
-      >
-        <i className="fa fa-heart-o"></i>
-        <span className="ml-1">Count me in!</span>
-      </button>
-    );
+  if (post.open) {
+    if (!like) {
+      return (
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={likePost}
+        >
+          <i className="fa fa-heart-o"></i>
+          <span className="ml-1">Count me in!</span>
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={unlikePost}
+        >
+          <i className="fa fa-heart like-color"></i>
+          <span className="ml-1">Don't count me in!</span>
+        </button>
+      );
+    }
   } else {
-    return (
-      <button
-        type="button"
-        className="btn btn-outline-danger"
-        onClick={unlikePost}
-      >
-        <i className="fa fa-heart like-color"></i>
-        <span className="ml-1">Don't count me in!</span>
-      </button>
-    );
+    return <div></div>;
   }
 };
 
