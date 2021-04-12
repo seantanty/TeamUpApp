@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import ListComments from "../Components/ListComments.js";
 import CommentBox from "../Components/CommentBox.js";
 import LikeButton from "../Components/LikeButton.js";
+import TeamUpComponent from "../Components/TeamUpComponent.js";
+import TeamList from "../Components/TeamList.js";
 
 function IndividualPost(props) {
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
   const [displayCommentBox, setdisplayCommentBox] = useState(false);
+  const curUserId = JSON.parse(localStorage.getItem("user")).userid;
+  const curUsername = JSON.parse(localStorage.getItem("user")).username;
 
   function clickComment() {
     setdisplayCommentBox(!displayCommentBox);
@@ -46,6 +50,7 @@ function IndividualPost(props) {
               <div className="bg-white p-2">
                 <div className="mt-2">
                   <h4>{post.title}</h4>
+                  <h6>Category:{post.category}</h6>
                   <p className="comment-text">{post.content}</p>
                 </div>
                 <div className="d-flex flex-row user-info">
@@ -69,9 +74,17 @@ function IndividualPost(props) {
                     <i className="fa fa-commenting-o"></i>
                     <span className="ml-1">Comment</span>
                   </button>
+                  <TeamUpComponent
+                    userid={curUserId}
+                    post={post}
+                  ></TeamUpComponent>
                 </div>
               </div>
               <CommentBox display={displayCommentBox} post={post}></CommentBox>
+              <TeamList
+                username={curUsername}
+                teamMembers={post.groupMember}
+              ></TeamList>
               <ListComments comments={comments}></ListComments>
             </div>
           </div>

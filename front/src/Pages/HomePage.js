@@ -6,6 +6,7 @@ import "../styles/home.css";
 function HomePage() {
   let [posts, setPosts] = useState([]);
   let [query, setQuery] = useState("");
+  let [cat, setCat] = useState("");
   let [page, setPage] = useState(0);
   let [total, setTotal] = useState(0);
   let [reload, setReload] = useState(0);
@@ -15,7 +16,9 @@ function HomePage() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const resRaw = await fetch(`./getPosts?query=${query}&page=${page}`);
+        const resRaw = await fetch(
+          `./getPosts?category=${cat}&query=${query}&page=${page}`
+        );
         const res = await resRaw.json();
         setPosts(res.posts);
         setTotal(res.total);
@@ -28,58 +31,62 @@ function HomePage() {
 
   return (
     <div className="container" id="container">
-      <div className="col-12 col-md-10 col-lg-8" style={{ margin: "0" }}>
-        <div className="card card-sm" id="searchBarBox">
-          <div
-            className="card-body row no-gutters align-items-center"
-            id="searchBar"
-          >
-            <div className="col-auto">
-              <i className="fa fa-search h4 text-body"></i>
-            </div>
-            <div className="col">
-              <input
-                ref={inSearchRef}
-                className="form-control form-control-lg form-control-borderless"
-                type="text"
-                placeholder="Search topics or keywords"
+      <div className="row">
+        <div className="col-md-8" id="searchBarBox">
+          <div className="input-group">
+            <div className="input-group-btn search-panel">
+              <select
+                className="form-select form-control"
                 onChange={(evt) => {
-                  setQuery(evt.target.value);
+                  setCat(evt.target.value);
                 }}
-                onKeyPress={(evt) => {
-                  console.log("keypress", evt.keyCode, evt.code);
-                  if (evt.code === "Enter") {
-                    console.log("Reload Data");
-                    setReload(reload + 1);
-                  }
-                }}
-                value={query}
-              />
+              >
+                <option value="">Category</option>
+                <option value="Study">Study</option>
+                <option value="Video Game">Video Games</option>
+                <option value="Outdoor">Outdoor Activities</option>
+                <option value="Online">Online Activities</option>
+              </select>
             </div>
-            <div className="col-auto">
+            <input
+              ref={inSearchRef}
+              className="form-control"
+              type="text"
+              placeholder="Search topics or keywords"
+              onChange={(evt) => {
+                setQuery(evt.target.value);
+              }}
+              onKeyPress={(evt) => {
+                if (evt.code === "Enter") {
+                  setReload(reload + 1);
+                }
+              }}
+              value={query}
+            />
+            <span className="input-group-btn">
               <button
-                className="btn btn-lg btn-success"
+                className="btn btn-success"
+                type="submit"
                 onClick={() => {
-                  const now = new Date();
-
-                  console.log("time is ", now);
                   setReload(reload + 1);
                 }}
               >
-                Search
+                <span className="fa fa-search"></span>
               </button>
-            </div>
+            </span>
           </div>
         </div>
       </div>
+
       <div className="container mt-100">
         <div className="row">
           <div className="col-md-10">
             <div className="card mb-3" id="postsCard">
               <div className="card-header pr-0 pl-0">
                 <div className="row no-gutters align-items-center w-100">
+                  <div className="col-md-2 font-weight-bold pl-3">Category</div>
                   <div className="col font-weight-bold pl-3">Titles</div>
-                  <div className="d-none d-md-block col-8 text-muted">
+                  <div className="d-none d-md-block col-4 text-muted">
                     <div className="row no-gutters align-items-center">
                       <div className="col-4">Replies</div>
                       <div className="col-8">Last update</div>

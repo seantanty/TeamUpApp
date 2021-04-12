@@ -6,20 +6,31 @@ const myDB = require("../db/MyDB.js");
 var path = require("path");
 const saltRounds = 10;
 
-//testing ground, please don't delete, sean will delete when needed.
+//This is the key GET route to work with react
+router.get("*", (req, res) =>
+  res.sendFile(path.resolve("front", "build", "index.html"))
+);
 
+//index GET
+router.get("/", function (req, res) {
+  res.sendFile(path.resolve(__dirname), "front/build", "index.html");
+});
+
+/* Post related section */
 router.post("/createPost", async (req, res) => {
   try {
     const postObj = {
       userId: req.user._id,
       username: req.user.username,
       title: req.body.title,
+      category: req.body.category,
       content: req.body.content,
       createdAt: new Date(),
       comments: [],
       interested: [],
       open: true,
       lastUpdated: new Date(),
+      groupMember: [],
     };
     const dbRes = await myDB.createPost(postObj);
     res.send({ p_id: dbRes.p_id });
@@ -55,6 +66,42 @@ router.post("/getPostById", async (req, res) => {
   }
 });
 
+router.post("/likePost", async (req, res) => {
+  try {
+    const dbRes = await myDB.likePost(
+      req.user._id,
+      req.user.username,
+      req.body.post
+    );
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/unlikePost", async (req, res) => {
+  try {
+    const dbRes = await myDB.unlikePost(req.user._id, req.body.postId);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/createTeam", async (req, res) => {
+  try {
+    const dbRes = await myDB.createTeam(req.body.post, req.body.teamMembers);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+/* Post related section */
+
+/* Comment related section */
 router.post("/createComment", async (req, res) => {
   try {
     const commentObj = {
@@ -74,26 +121,6 @@ router.post("/createComment", async (req, res) => {
   }
 });
 
-router.post("/likePost", async (req, res) => {
-  try {
-    const dbRes = await myDB.likePost(req.user._id, req.body.post);
-    res.send(dbRes);
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-router.post("/unlikePost", async (req, res) => {
-  try {
-    const dbRes = await myDB.unlikePost(req.user._id, req.body.postId);
-    res.send(dbRes);
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
 router.get("/getComments", async (req, res) => {
   try {
     const dbRes = await myDB.getComments(req.query);
@@ -103,29 +130,9 @@ router.get("/getComments", async (req, res) => {
     res.status(400).send({ err: e });
   }
 });
+/* Comment related section */
 
-//testing ground, please don't delete, sean will delete when needed.
-
-//This is the key GET route to work with react
-router.get("*", (req, res) =>
-  res.sendFile(path.resolve("front", "build", "index.html"))
-);
-
-//middle function to check login status before show profile page
-function loggedIn(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect("/login");
-  }
-}
-
-//index GET
-router.get("/", function (req, res) {
-  res.sendFile(path.resolve(__dirname), "front/build", "index.html");
-});
-
-//login POST
+/* Auth related section */
 
 router.post(
   "/login",
@@ -144,7 +151,6 @@ router.get("/logout", function (req, res) {
   res.redirect("/");
 });
 
-//check same user name before register
 router.post("/checkSameUserName", async (req, res) => {
   try {
     console.log("query", req.body);
@@ -156,7 +162,6 @@ router.post("/checkSameUserName", async (req, res) => {
   }
 });
 
-//register POST
 router.post("/register", async (req, res) => {
   try {
     console.log("user register info", req.body);
@@ -200,7 +205,6 @@ router.post("/getUserByName", async (req, res) => {
   }
 });
 
-//route to get user info
 router.get("/getUser", (req, res) =>
   res.send({
     username: req.user ? req.user.username : null,
@@ -209,93 +213,5 @@ router.get("/getUser", (req, res) =>
     interested: req.user ? req.user.interested : null,
   })
 );
-
-
-
-
-
-
-
-
-//profile GET
-router.get("/profile", loggedIn, function (req, res) {
-  res.sendFile(path.join(__dirname + "/../public/profile.html"));
-});
-
-/*index routs*/
-// get puzzle by size
-router.get("/getPuzzlesPlay", async (req, res) => {
-  try {
-    console.log("Getting puzzles by size");
-    const puzzles = await myDB.getPuzzleBySize();
-    res.send({ puzzles: puzzles });
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-/*leader board routes*/
-// get boards of popular puzzles
-router.get("/getPuzzles", async (req, res) => {
-  try {
-    console.log("Getting polular puzzles");
-    const puzzles = await myDB.getPuzzles();
-    res.send({ puzzles: puzzles });
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-//get board by searching puzzle id
-router.post("/searchBoard", async (req, res) => {
-  console.log("Search a puzzle", req.body);
-  try {
-    const puzzleId = req.body.puzzleid;
-    const puzzle = await myDB.getPuzzleById(puzzleId);
-    let leaderBoard = {
-      success: false,
-    };
-    if (puzzle == null) {
-      console.log("No leaderboard found");
-    } else {
-      leaderBoard = {
-        code: puzzle.code,
-        leaderBoard: puzzle.leaderBoard,
-        info: puzzle.info,
-        success: true,
-      };
-    }
-    res.send(leaderBoard);
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-//route to save solved puzzle to user collection
-router.post("/saveTimeToUser", async (req, res) => {
-  console.log("save time", req.body);
-  try {
-    const saveTime = await myDB.saveTimeToUser(req.body);
-    res.send(saveTime);
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
-
-//route to save solved puzzle to puzzle collection
-router.post("/saveToLeaderBoard", async (req, res) => {
-  console.log("save to leaderboard", req.body);
-  try {
-    const saveLB = await myDB.saveToLeaderBoard(req.body);
-    res.send(saveLB);
-  } catch (e) {
-    console.log("Error", e);
-    res.status(400).send({ err: e });
-  }
-});
 
 module.exports = router;
