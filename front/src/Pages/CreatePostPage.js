@@ -66,8 +66,8 @@ const CreatePostPage = () => {
                 <option value="">Category</option>
                 <option value="Study">Study</option>
                 <option value="Video Game">Video Games</option>
-                <option value="Outdoor">Outdoor Activities</option>
-                <option value="Online">Online Activities</option>
+                <option value="Outdoor Activities">Outdoor Activities</option>
+                <option value="Online Activities">Online Activities</option>
               </select>
             </div>
 

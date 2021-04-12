@@ -50,6 +50,7 @@ function IndividualPost(props) {
               <div className="bg-white p-2">
                 <div className="mt-2">
                   <h4>{post.title}</h4>
+                  <h6>Category:{post.category}</h6>
                   <p className="comment-text">{post.content}</p>
                 </div>
                 <div className="d-flex flex-row user-info">

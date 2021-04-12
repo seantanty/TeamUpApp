@@ -8,19 +8,6 @@ function MyDB() {
     "mongodb+srv://seantan:TanWeb5610Ge@cluster0.u90qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
   const DB_NAME = "5610Project3";
 
-  const postSchema = {
-    postId: "_id",
-    user: "user._id",
-    createAt: "timestamp",
-    category: "type of event",
-    interested: [],
-    title: "title",
-    content: "content",
-    status: "open/closed",
-  };
-
-  console.log(postSchema);
-  //create post
   myDB.createPost = async (post) => {
     let client;
     try {
@@ -29,7 +16,7 @@ function MyDB() {
       const db = client.db(DB_NAME);
       const postsCol = db.collection("posts");
       const u_id = new ObjectId(post.userId);
-      //need to add a post backend verification
+      //plan to add a post backend verification
       const res1 = await postsCol.insertOne(post);
       const p_id = new ObjectId(res1.ops[0]._id);
       const res2 = await db.collection("Users").updateOne(
@@ -89,7 +76,6 @@ function MyDB() {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
-      //need to add a post backend verification
       const res1 = await db.collection("posts").updateOne(
         { _id: p_id },
         {
@@ -127,7 +113,6 @@ function MyDB() {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
-      //need to add a post backend verification
       const res1 = await db.collection("posts").updateOne(
         { _id: p_id },
         {
@@ -162,7 +147,6 @@ function MyDB() {
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
-      //need to add a post backend verification
       const res1 = await db.collection("posts").updateOne(
         { _id: p_id },
         {
@@ -191,7 +175,6 @@ function MyDB() {
     }
   };
 
-  //get comments
   myDB.getComments = async (query) => {
     let client;
     try {
@@ -207,7 +190,6 @@ function MyDB() {
     }
   };
 
-  //get posts
   myDB.getPosts = async (query) => {
     let client;
     try {
@@ -227,7 +209,6 @@ function MyDB() {
     }
   };
 
-  //get postById
   myDB.getPostById = async (query) => {
     let client;
     try {
@@ -238,22 +219,6 @@ function MyDB() {
       let o_id = new ObjectId(query);
       const post = await postsCol.find({ _id: o_id }).toArray();
       return post[0];
-    } finally {
-      client.close();
-    }
-  };
-
-  //edit post
-  myDB.editPost = async (post) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      const db = client.db(DB_NAME);
-      const postsCol = db.collection("posts");
-      //edit the passed in part of the post
-      const res = await postsCol.insertOne(post);
-      return res;
     } finally {
       client.close();
     }

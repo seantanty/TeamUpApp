@@ -19,6 +19,9 @@ const ListPosts = (props) => {
         <div className="forum-item active" key={"Posts" + i}>
           <div className="card-body py-3">
             <div className="row no-gutters align-items-center">
+              <div className="col-md-2">
+                <p>{p.category}</p>
+              </div>
               <div className="col">
                 <Link
                   to={{
@@ -28,7 +31,7 @@ const ListPosts = (props) => {
                   <p className="forum-item-title">{p.title}</p>
                 </Link>
               </div>
-              <div className="d-none d-md-block col-8">
+              <div className="d-none d-md-block col-4">
                 <div className="row no-gutters align-items-center">
                   <div className="col-4">{replies}</div>
                   <div className="col-8">{dateToShow}</div>
