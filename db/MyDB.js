@@ -28,10 +28,23 @@ function MyDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const postsCol = db.collection("posts");
+      const u_id = new ObjectId(post.userId);
       //need to add a post backend verification
-      const res = await postsCol.insertOne(post);
-      //add post to user
-      return res;
+      const res1 = await postsCol.insertOne(post);
+      const p_id = new ObjectId(res1.ops[0]._id);
+      const res2 = await db.collection("Users").updateOne(
+        { _id: u_id },
+        {
+          $push: {
+            posted: {
+              _id: p_id,
+              title: post.title,
+              createdAt: post.createdAt,
+            },
+          },
+        }
+      );
+      return { res1, res2 };
     } finally {
       client.close();
     }
