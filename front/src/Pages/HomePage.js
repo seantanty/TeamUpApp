@@ -27,7 +27,7 @@ function HomePage() {
       }
     };
     getPosts();
-  }, [reload, page]);
+  }, [page, query]);
 
   return (
     <div className="container" id="container">
@@ -85,7 +85,7 @@ function HomePage() {
       <div className="container mt-100">
         <div className="row">
           <div className="col-md-10">
-            <div className="card mb-3" id="posts card">
+            <div className="card mb-3" id="postsCard">
               <div className="card-header pr-0 pl-0">
                 <div className="row no-gutters align-items-center w-100">
                   <div className="col font-weight-bold pl-3">Titles</div>

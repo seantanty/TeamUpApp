@@ -8,16 +8,9 @@ const NavigationBar = () => {
   const location = useLocation();
   console.log("Render NavigationBar", location);
 
-  /*
-  const buttonStyle = {
-    background: "none",
-    border: 0,
-  };
-  */
-
   return (
     <nav className="navbar navbar-expand-lg color-nav">
-      <div className="container-fluid">
+      <div className="container">
         <Link className="navbar-brand" to="/">
           <img id="icon" src={icon} alt="icon" />
           TeamUp

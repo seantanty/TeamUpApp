@@ -1,21 +1,21 @@
-/*@value primaryFontColor, secondaryFontColor, borderColor from "../../styles/globalStyles.css";*/
 
 .Count {
   flex: 1;
   margin: 0px 10px 10px 10px;
   padding: 15px 7.5px;
-  
+
   display: flex;
   align-items: center;
 
-  border: 1px solid #e8e8e8; 
-  max-width: 150px;
+  border: 1px solid #e8e8e8;
+  background-color: #ffffff;
+  max-width: 145px;
 }
 
 .count {
   font-size: 30px;
   font-weight: lighter;
- }
+}
 
 .label {
   font-size: 15px;

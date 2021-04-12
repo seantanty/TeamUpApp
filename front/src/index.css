@@ -1,4 +1,8 @@
 body {
-  margin: 20px;
   font-family: sans-serif;
+  background-color: #f0ffff;
+  margin: 0;
+  line-height: 1.5;
+  color: #495057;
+  text-align: left;
 }

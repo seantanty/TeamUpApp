@@ -3,12 +3,12 @@ body {
   line-height: 1.5;
   color: #495057;
   text-align: left;
-  background-color: #ffffff;
 }
 
 .containter {
   margin-top: 20px;
   position: relative;
+  background-color: #f0ffff;
 }
 
 .countsContainer {

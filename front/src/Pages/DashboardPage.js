@@ -31,13 +31,13 @@ const DashboardPage = () => {
         setInterestCount(res.interested.length);
         setPostCount(res.posted.length);
         //setTeamedCount(res.teamuped.length);
-        
+
         //set posts
         const userPosted = res.posted.sort((a, b) =>
-          a.createdAt > b.createdAt ? -1 : 1
+          Date(a.createdAt) > Date(b.createdAt) ? 1 : -1
         );
         const userInterested = res.interested.sort((a, b) =>
-          a.createdAt > b.createdAt ? -1 : 1
+          Date(a.createdAt) > Date(b.createdAt) ? 1 : -1
         );
         console.log(userPosted);
         setPosted(userPosted);
