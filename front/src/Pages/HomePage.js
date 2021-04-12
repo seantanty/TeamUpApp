@@ -16,9 +16,16 @@ function HomePage() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const resRaw = await fetch(
-          `./getPosts?category=${cat}&query=${query}&page=${page}`
-        );
+        const resRaw = await fetch("/getPosts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ category: cat, query: query, page: page }),
+        });
+        // const resRaw = await fetch(
+        //   `./getPosts?category=${cat}&query=${query}&page=${page}`
+        // );
         const res = await resRaw.json();
         setPosts(res.posts);
         setTotal(res.total);
@@ -27,7 +34,7 @@ function HomePage() {
       }
     };
     getPosts();
-  }, [page, query]);
+  }, [page, reload, cat]);
 
   return (
     <div className="container" id="container">

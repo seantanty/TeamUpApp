@@ -41,6 +41,8 @@ function MyDB() {
   myDB.getPosts = async (query) => {
     let client;
     try {
+      console.log(query.query);
+      console.log(query.category);
       const titleQuery = query.query || "";
       const catQuery = query.category || "";
       client = new MongoClient(url, { useUnifiedTopology: true });

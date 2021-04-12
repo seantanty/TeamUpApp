@@ -11,7 +11,7 @@ const CreatePostPage = () => {
   const createPost = async (event) => {
     event.preventDefault();
     if (title === "" || cat === "") {
-      window.location.reload();
+      alert("Post must have a title and category.");
     } else {
       let time = new Date();
 
