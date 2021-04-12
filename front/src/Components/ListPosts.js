@@ -23,7 +23,6 @@ const ListPosts = (props) => {
                 <Link
                   to={{
                     pathname: `/post/${p._id}`,
-                    state: { post: p },
                   }}
                 >
                   <p className="forum-item-title">{p.title}</p>

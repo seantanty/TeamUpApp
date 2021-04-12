@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import ListComments from "../Components/ListComments.js";
 import CommentBox from "../Components/CommentBox.js";
 import LikeButton from "../Components/LikeButton.js";
 
 function IndividualPost(props) {
-  const { state } = useLocation();
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
   const [displayCommentBox, setdisplayCommentBox] = useState(false);
@@ -27,7 +25,7 @@ function IndividualPost(props) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id: state.post._id }),
+          body: JSON.stringify({ id: window.location.pathname.slice(6) }),
         });
         const res = await resRaw.json();
         setPost(res);
