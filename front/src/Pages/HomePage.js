@@ -74,7 +74,7 @@ function HomePage() {
       </div>
       <div className="container-fluid mt-100">
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-10">
             <div className="card mb-3">
               <div className="card-header pr-0 pl-0">
                 <div className="row no-gutters align-items-center w-100">
