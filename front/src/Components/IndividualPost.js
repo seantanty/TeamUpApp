@@ -43,7 +43,13 @@ function IndividualPost(props) {
 
   return (
     <div>
-      <div className="container mt-5 bg-white" style={{border: "1px solid #e8e8e8"}}>
+      <div
+        className="container mt-5 bg-white"
+        style={{
+          border: "1px solid #e8e8e8",
+          width: "800px"
+        }}
+      >
         <div className="d-flex justify-content-center row">
           <div className="col-md-10">
             <div className="d-flex flex-column comment-section">
@@ -62,7 +68,10 @@ function IndividualPost(props) {
                   </div>
                 </div>
               </div>
-              <div className="form-group bg-white" style={{ marginLeft: "0px" }}>
+              <div
+                className="form-group bg-white"
+                style={{ marginLeft: "0px" }}
+              >
                 <div className="interactions">
                   <LikeButton post={post}></LikeButton>
                   <button
@@ -91,7 +100,7 @@ function IndividualPost(props) {
                 username={curUsername}
                 teamMembers={post.groupMember}
               ></TeamList>
-              <br/ >
+              <br />
               <ListComments comments={comments}></ListComments>
             </div>
           </div>
