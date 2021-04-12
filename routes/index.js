@@ -22,11 +22,7 @@ router.post("/createPost", async (req, res) => {
       lastUpdated: new Date(),
     };
     const dbRes = await myDB.createPost(postObj);
-    if (dbRes == null) {
-      res.redirect("/");
-    } else {
-      res.redirect("/");
-    }
+    res.send({ p_id: dbRes.p_id });
   } catch (e) {
     console.log("Error", e);
     res.status(400).send({ err: e });

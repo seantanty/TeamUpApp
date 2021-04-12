@@ -44,7 +44,7 @@ function MyDB() {
           },
         }
       );
-      return { res1, res2 };
+      return { res1, res2, p_id };
     } finally {
       client.close();
     }

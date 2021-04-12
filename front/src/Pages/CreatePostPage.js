@@ -7,25 +7,30 @@ const CreatePostPage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  async function createPost() {
+  const createPost = async (event) => {
+    event.preventDefault();
     let time = new Date();
-    await fetch("/createPost", {
+
+    const resRaw = await fetch("/createPost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify({
         title: title,
         content: content,
         createdAt: time.toString(),
       }),
-    }).then((res) => {
-      if (res.redirected) {
-        console.log(res.url);
-        window.location.href = res.url;
-      }
     });
-  }
+
+    const res = await resRaw.json();
+    if (res.p_id) {
+      window.location.href = `/post/${res.p_id}`;
+    } else {
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="container" id="postContainer">
