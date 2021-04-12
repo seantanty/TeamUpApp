@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="200" height="165">
+    <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="256" height="256">
   </a>
 </p>
 
@@ -50,7 +50,7 @@ And the app is deployed by Heroku.
 If you would like to explore the app, install nodejs (https://nodejs.org/en/download/package-manager/)<br>
 In Your directory\TeamUpApp\
 $ yarn install\
-$ yarn start\
+$ yarn start
 
 In Your directory\TeamUpApp\front\
 $ yarn install\
@@ -58,7 +58,7 @@ $ yarn start\
 go to localhost:3000 and enjoy!\
 Or you can\
 $ yarn build\
-go to localhost:3001 and enjoy!\
+go to localhost:3001 and enjoy!
 
 
 
