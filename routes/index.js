@@ -124,12 +124,6 @@ function loggedIn(req, res, next) {
   }
 }
 
-/*
-router.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/../public/profile.html"));
-});
-*/
-
 //index GET
 router.get("/", function (req, res) {
   res.sendFile(path.resolve(__dirname), "front/build", "index.html");
@@ -147,14 +141,6 @@ router.post(
     //res.redirect("/");
   }
 );
-
-//logout GET
-/*
-router.get("/logout", loggedIn, function (req, res) {
-  req.logout();
-  res.redirect("/");
-});
-*/
 
 router.get("/logout", function (req, res) {
   req.logout();
@@ -227,6 +213,13 @@ router.get("/getUser", (req, res) =>
     interested: req.user ? req.user.interested : null,
   })
 );
+
+
+
+
+
+
+
 
 //profile GET
 router.get("/profile", loggedIn, function (req, res) {

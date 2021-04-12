@@ -1,8 +1,10 @@
 .color-nav, .navbar-nav{
-  background-color: #ffffff;
+  background-color: #f0ffff;
+  height: 50px;
 }
 
 .nav-link {
   color: #808080;
+  padding-top: 10px;
 }
 

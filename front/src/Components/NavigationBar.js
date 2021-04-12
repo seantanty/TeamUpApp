@@ -2,24 +2,18 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "../styles/navigationbar.css";
-import icon from "../styles/teamup32.png"
+import icon from "../styles/teamup32.png";
 
 const NavigationBar = () => {
   const location = useLocation();
   console.log("Render NavigationBar", location);
 
-  /*
-  const buttonStyle = {
-    background: "none",
-    border: 0,
-  };
-  */
-
   return (
     <nav className="navbar navbar-expand-lg color-nav">
-      <div className="container-fluid">
+      <div className="container">
         <Link className="navbar-brand" to="/">
-          <img id="icon" src={icon} alt="icon"/>TeamUp 
+          <img id="icon" src={icon} alt="icon" />
+          TeamUp
         </Link>
         <button
           className="navbar-toggler"

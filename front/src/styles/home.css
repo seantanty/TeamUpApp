@@ -3,12 +3,11 @@ body {
   line-height: 1.5;
   color: #495057;
   text-align: left;
-  background-color: #f0ffff;
 }
 
 #container {
-  background-color: #ffffff;
-  margin-left: 150px;
+  background-color: #f0ffff;
+  padding-left: 150px;
 }
 
 .form-control-borderless {
@@ -30,11 +29,11 @@ body {
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
   border-width: 0;
   transition: all 0.2s;
-  /*background-color: #f0ffff;*/
+  background-color: #ffffff;
 }
 
 #postsCard {
-  background-color: #f0ffff;
+  background-color: #ffffff;
 }
 
 .card-header {
@@ -67,5 +66,5 @@ body {
 }
 
 .Pagination {
-  margin-left: 180px;
+  padding-left: 200px;
 }
