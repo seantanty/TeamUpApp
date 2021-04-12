@@ -57,9 +57,7 @@ function HomePage() {
                 setQuery(evt.target.value);
               }}
               onKeyPress={(evt) => {
-                console.log("keypress", evt.keyCode, evt.code);
                 if (evt.code === "Enter") {
-                  console.log("Reload Data");
                   setReload(reload + 1);
                 }
               }}
@@ -70,8 +68,6 @@ function HomePage() {
                 className="btn btn-success"
                 type="submit"
                 onClick={() => {
-                  console.log(query);
-                  console.log(reload);
                   setReload(reload + 1);
                 }}
               >

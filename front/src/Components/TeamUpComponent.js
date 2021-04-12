@@ -33,7 +33,6 @@ const TeamUpComponent = (props) => {
         teammates.splice(index, 1);
       }
     }
-    console.log(teammates);
   };
 
   function renderCandidates() {
