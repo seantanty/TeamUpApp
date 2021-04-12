@@ -18,7 +18,7 @@ const ListPostsUser = (props) => {
               <div className="col">
                 <Link
                   to={{
-                    pathname: `/post/${p.post_id}`,
+                    pathname: `/post/${p._id}`,
                     state: { post: p },
                   }}
                 >

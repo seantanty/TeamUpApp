@@ -28,9 +28,23 @@ function MyDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const postsCol = db.collection("posts");
+      const u_id = new ObjectId(post.userId);
       //need to add a post backend verification
-      const res = await postsCol.insertOne(post);
-      return res;
+      const res1 = await postsCol.insertOne(post);
+      const p_id = new ObjectId(res1.ops[0]._id);
+      const res2 = await db.collection("Users").updateOne(
+        { _id: u_id },
+        {
+          $push: {
+            posted: {
+              _id: p_id,
+              title: post.title,
+              createdAt: post.createdAt,
+            },
+          },
+        }
+      );
+      return { res1, res2 };
     } finally {
       client.close();
     }
@@ -67,11 +81,11 @@ function MyDB() {
     }
   };
 
-  myDB.expressInterest = async (userId, postId) => {
+  myDB.likePost = async (userId, post) => {
     let client;
     try {
       const u_id = new ObjectId(userId);
-      const p_id = new ObjectId(postId);
+      const p_id = new ObjectId(post._id);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
       const db = client.db(DB_NAME);
@@ -91,7 +105,9 @@ function MyDB() {
         {
           $push: {
             interested: {
-              userId: p_id,
+              _id: p_id,
+              title: post.title,
+              createdAt: new Date(),
             },
           },
         }
@@ -102,7 +118,7 @@ function MyDB() {
     }
   };
 
-  myDB.unInterest = async (userId, postId) => {
+  myDB.unlikePost = async (userId, postId) => {
     let client;
     try {
       const u_id = new ObjectId(userId);
@@ -126,7 +142,7 @@ function MyDB() {
         {
           $pull: {
             interested: {
-              userId: p_id,
+              post_id: p_id,
             },
           },
         }
@@ -141,7 +157,6 @@ function MyDB() {
   myDB.getComments = async (query) => {
     let client;
     try {
-      console.log(query);
       const p_id = new ObjectId(query);
       client = new MongoClient(url, { useUnifiedTopology: true });
       await client.connect();
@@ -316,7 +331,7 @@ function MyDB() {
       await client.connect();
       const db = client.db(DB_NAME);
       const userCol = db.collection("Users");
-      const data = await userCol.find({username:query}).toArray();
+      const data = await userCol.find({ username: query }).toArray();
       return data;
     } finally {
       client.close();

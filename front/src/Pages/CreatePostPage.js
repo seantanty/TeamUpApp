@@ -36,6 +36,7 @@ const CreatePostPage = () => {
               <label for="title">
                Title *
               </label>
+          
               <input
                 type="text"
                 className="form-control"
@@ -45,7 +46,7 @@ const CreatePostPage = () => {
             </div>
 
             <div className="form-group">
-              <label for="description">Description</label>
+              <label>Description</label>
               <textarea
                 rows="5"
                 className="form-control"
@@ -53,14 +54,12 @@ const CreatePostPage = () => {
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>
-
   
               <p>
                 <br />
                 <span className="require">*</span> - required fields
               </p>
             
-
             <div className="form-group">
               <button
                 type="submit"
