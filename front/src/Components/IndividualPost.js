@@ -78,6 +78,7 @@ function IndividualPost(props) {
                     <i className="fa fa-commenting-o"></i>
                     <span className="ml-1">Comment</span>
                   </button>
+                  <br /> <br />
                   <TeamUpComponent
                     userid={curUserId}
                     post={post}
