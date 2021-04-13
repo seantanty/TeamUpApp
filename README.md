@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="enigmatic-cliffs-18531.herokuapp.com/">
+  <a href="https://enigmatic-cliffs-18531.herokuapp.com/">
     <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="150" height="150">
   </a>
 </p>
@@ -45,6 +45,8 @@ And the app is deployed by Heroku.
 * Express: version 4.17.1
 * React: version 17.0.2
 * Mongodb: version 3.6.4
+* Passport: version 0.4.1
+* BCrypt: v5.0.1
 
 ### Setup for Development
 ***
