@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="">
+  <a href="enigmatic-cliffs-18531.herokuapp.com/">
     <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="150" height="150">
   </a>
 </p>
@@ -10,7 +10,7 @@ Class Link: [Web Development](https://johnguerra.co/classes/webDevelopment_sprin
 Deployed to Heroku: [Link](https://enigmatic-cliffs-18531.herokuapp.com/)
 ***
 A teamup forum app serving students to convenientyly form teams to study, play and enjoy lives together on and off campus.
-<a href="demolink">Video demo</a>
+<a href="https://www.youtube.com/watch?v=b1qkEst-7Pw&ab_channel=YongliangTan">Video demo</a>
 
 ## Table of Contents
 1. [Project Objective](#project-objective)
@@ -28,6 +28,7 @@ And the app is deployed by Heroku.
 * User can create a post to find team members.
 * User can search/filter other’s posts and express interest/leave comments to join a team.
 * Post owner can check the posts he/she created, select team member and form a team.
+* User can access to dashboard to check post status.
 
 ### Screenshots
 *** 
