@@ -11,13 +11,13 @@ const RegisterPage = () => {
     console.log("username", username);
     console.log("password", password);
     // check valid username and password first
-    if (username.match(regExp)) {
-      if (password === null || password === "" || password === undefined) {
+    if (username.match(regExp)) {                                             // validation condition 1: email address 
+      if (password === null || password === "" || password === undefined) {   // validation condition 2: null
         alert("Please enter your password.");
         console.log("stay here");
         return false;
       } else {
-        const resRaw = await fetch("/checkSameUserName", {
+        const resRaw = await fetch("/checkSameUserName", {                    // validation condition 3: already exists
           method: "POST",
           headers: {
             "Content-Type": "application/json",
