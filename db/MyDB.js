@@ -37,7 +37,7 @@ function MyDB() {
     }
   };
 
-  myDB.getPosts = async (query) => {
+  myDB.getPosts = async (query) => {    // get data from database
     let client;
     try {
       console.log(query.query);
@@ -58,7 +58,7 @@ function MyDB() {
     }
   };
 
-  myDB.getPostById = async (query) => {
+  myDB.getPostById = async (query) => {     // get data from database
     let client;
     try {
       client = new MongoClient(url, { useUnifiedTopology: true });
