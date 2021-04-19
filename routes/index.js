@@ -180,7 +180,6 @@ router.post("/register", async (req, res) => {
       res.send({userid: null});
       //res.redirect("/register");
     } else {
-      console.log("enter here");
       passport.authenticate("local")(req, res, function () {
         console.log("successful register and login");
         console.log("userid", req.user._id);

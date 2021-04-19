@@ -8,7 +8,8 @@ const RegisterPage = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  async function register() {
+  async function register(event) {
+    event.preventDefault();
     console.log("username", username);
     console.log("password", password);
     // check valid username and password first
