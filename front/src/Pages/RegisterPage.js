@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/auth.css";
 
 let regExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -32,7 +33,7 @@ const RegisterPage = () => {
           return false;
         } else {
           // register
-          await fetch("/register", {
+          const resRaw = await fetch("/register", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -42,12 +43,21 @@ const RegisterPage = () => {
               username: username,
               password: password,
             }),
-          }).then((response) => {
-            if (response.redirected) {
-              console.log(response.url);
-              window.location.href = response.url;
-            }
           });
+
+          const res = await resRaw.json();
+          console.log(res);
+          if (res.userid === null) {
+            alert("Please enter a valid e-mail address.");
+          } else {
+            const userInfo = JSON.stringify({
+              username: username,
+              userid: res.userid,
+            });
+            // save user info to local storage
+            localStorage.setItem("user", userInfo);
+            window.location.href = "/";
+          }
         }
       }
     } else {
@@ -58,36 +68,43 @@ const RegisterPage = () => {
 
   return (
     <div className="container">
-      <div className="card-header" style={{backgroundColor: "#f0ffff"}}>
-        <h3 className="mb-0">Sign up</h3>
-      </div>
-
-      <div className="card-body">
-        <label className="form-label">
-          Email address
+      <div className="card" id="card_register">
+        <div className="form-floating my-3">
           <input
-            type="email"
-            className="form-control form-control-lg rounded-0"
+            type="text"
+            className="form-control"
             name="username"
+            placeholder=""
+            id="username"
             onChange={(e) => setUserName(e.target.value)}
           />
-        </label>
-        <br />
-        <label className="form-label">
-          Password
+          <label id="userlabel" htmlFor={username}>
+            Username
+          </label>
+        </div>
+
+        <div className="form-floating my-3">
           <input
             type="password"
+            className="form-control"
             name="password"
-            className="form-control form-control-lg rounded-0"
-            required=""
+            placeholder=""
+            id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
-        <br />
-        <button type="submit" className="btn btn-primary" onClick={register}>
+          <label htmlFor={password}>Password</label>
+        </div>
+
+        <button
+          type="submit"
+          className="btn btn-primary"
+          id="btn_signup"
+          onClick={register}
+        >
           Sign up
         </button>
-        <br /> <br />
+        <br />
+        <br />
         <p className="message">
           Registered Already? <Link to="/login">Sign in</Link>
         </p>

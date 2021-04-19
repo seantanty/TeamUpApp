@@ -1,7 +1,7 @@
 .form-group {
   margin-top: 30px;
   margin-left: 175px;
-  background-color: #f0ffff;
+  background-color: #ffffff;
 }
 
 .require {
@@ -17,3 +17,8 @@
   float: left;
   color: #ffffff;
 }
+
+#createPost, #cancel {
+  width: 100px;
+}
+

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/auth.css";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");
@@ -36,33 +37,39 @@ const LoginPage = () => {
 
   return (
     <div className="container">
-      <div className="card-header" style={{backgroundColor: "#f0ffff"}}>
-        <h3 className="mb-0">Sign in</h3>
-      </div>
-      <div className="card-body">
-        <label className="form-label">
-          Email address
+      <div className="card" id="card_login">
+        <div className="form-floating my-3">
           <input
-            type="email"
-            className="form-control form-control-lg rounded-0"
+            type="text"
+            className="form-control"
             name="username"
+            placeholder=""
+            id="username"
             onChange={(e) => setUserName(e.target.value)}
           />
-        </label>
-        <br />
-        <label className="form-label">
-          Password
+          <label id="userlabel" htmlFor={username}>
+            Username
+          </label>
+        </div>
+
+        <div className="form-floating my-3">
           <input
             type="password"
+            className="form-control"
             name="password"
-            className="form-control form-control-lg rounded-0"
-            required=""
+            placeholder=""
+            id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
+          <label htmlFor={password}>Password</label>
+        </div>
 
-        <br />
-        <button type="submit" className="btn btn-primary" onClick={login}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          id="btn_signin"
+          onClick={login}
+        >
           Sign in
         </button>
         <br />

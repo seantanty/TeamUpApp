@@ -1,16 +1,21 @@
 <p align="center">
+<<<<<<< Updated upstream
   <a href="">
     <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="150" height="150">
+=======
+  <a href="https://enigmatic-cliffs-18531.herokuapp.com/">
+    <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="200" height="200">
+>>>>>>> Stashed changes
   </a>
 </p>
 
 # TeamUp App (app link)
 Author: [Yongliang (Sean) Tan](https://seantanty.github.io/CS-5610-project1/index.html) & [Xinyi Ge](https://xinyijackiege.github.io/)\
 Class Link: [Web Development](https://johnguerra.co/classes/webDevelopment_spring_2021/)
-Deployed to Heroku: [Link]()
+Deployed to Heroku: [Link](https://enigmatic-cliffs-18531.herokuapp.com/)
 ***
-A teamup forum app serving students to convenientyly form teams to study, play and enjoy lives together on and off campus.
-<a href="demolink">Video demo</a>
+A teamup forum app serving students to conveniently  form teams to study, play and enjoy lives together on and off campus.
+<a href="https://www.youtube.com/watch?v=b1qkEst-7Pw&ab_channel=YongliangTan">Video demo</a>
 
 ## Table of Contents
 1. [Project Objective](#project-objective)
@@ -27,7 +32,8 @@ And the app is deployed by Heroku.
 * The app applies user authentication.
 * User can create a post to find team members.
 * User can search/filter other’s posts and express interest/leave comments to join a team.
-* Post owner can check the posts he/she created, select team member and form a team.
+* Post owner can check the posts he/she created, select team members and form a team.
+* User can access to dashboard to check post status.
 
 ### Screenshots
 *** 
@@ -43,6 +49,8 @@ And the app is deployed by Heroku.
 * Node.js: version v14.16.0
 * Express: version 4.17.1
 * React: version 17.0.2
+* Passport: version 0.4.1
+* BCrypt: v5.0.1
 * Mongodb: version 3.6.4
 
 ### Setup for Development

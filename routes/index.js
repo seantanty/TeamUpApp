@@ -174,11 +174,18 @@ router.post("/register", async (req, res) => {
     };
 
     const dbRes = await myDB.createUser(userObj);
+
     if (dbRes == null) {
-      res.redirect("/register");
+      console.log("error!!!");
+      res.send({userid: null});
+      //res.redirect("/register");
     } else {
+      console.log("enter here");
       passport.authenticate("local")(req, res, function () {
-        res.redirect("/");
+        console.log("successful register and login");
+        console.log("userid", req.user._id);
+        res.send({ userid: req.user._id });
+        //res.redirect("/login");
       });
     }
   } catch (e) {

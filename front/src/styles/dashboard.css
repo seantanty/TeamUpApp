@@ -1,14 +1,8 @@
-body {
-  margin: 0;
-  line-height: 1.5;
-  color: #495057;
-  text-align: left;
-}
-
 .containter {
   margin-top: 20px;
   position: relative;
-  background-color: #f0ffff;
+  background-color: #ffffff;
+  text-align: left;
 }
 
 .countsContainer {
