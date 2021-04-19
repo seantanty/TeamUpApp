@@ -1,3 +1,4 @@
+Files are neatly organized into their designated folders, Readme file is very descriptive and explains project well. Great job!
 <p align="center">
   <a href="https://enigmatic-cliffs-18531.herokuapp.com/">
     <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="150" height="150">
