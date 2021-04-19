@@ -1,11 +1,6 @@
 <p align="center">
-<<<<<<< Updated upstream
-  <a href="">
-    <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="150" height="150">
-=======
   <a href="https://enigmatic-cliffs-18531.herokuapp.com/">
     <img src="https://i.imgur.com/dZUT2A5.png" alt="TeamUp logo" width="200" height="200">
->>>>>>> Stashed changes
   </a>
 </p>
 
