@@ -86,9 +86,9 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="container mt-100">
+      <div className="container-fluid mt-100">
         <div className="row">
-          <div className="col-md-10">
+          <div className="col-md-12">
             <div className="card mb-3" id="postsCard">
               <div className="card-header pr-0 pl-0">
                 <div className="row no-gutters align-items-center w-100">

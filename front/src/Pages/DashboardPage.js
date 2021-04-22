@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tabs";
 
 import Count from "../Components/Count.js";
 import ListPostsUser from "../Components/ListPostsUser.js";
+import DashboardCardHeader from "../Components/DashboardCardHeader.js";
 
 const DashboardPage = () => {
   const [postCount, setPostCount] = useState(0);
@@ -11,6 +14,7 @@ const DashboardPage = () => {
   const [posted, setPosted] = useState([]);
   const [interested, setInterested] = useState([]);
   const [teamuped, setTeamuped] = useState([]);
+  const [key, setKey] = useState("posted");
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -68,54 +72,36 @@ const DashboardPage = () => {
       </div>
 
       <div className="container-fluid mt-100">
-        <div className="row">
-          <div className="col-md-9">
-            <div className="card mb-3">
-              <div className="card-header pr-0 pl-0">
-                <div className="row no-gutters align-items-center w-100">
-                  <div className="col font-weight-bold pl-3">Titles</div>
-                  <div className="d-none d-md-block col-6 text-muted">
-                    <div className="row no-gutters align-items-center">
-                      <div className="col-6">Last update</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className="card mb-3">
-                  <div className="card-header pr-0 pl-0">
-                    <div className="row no-gutters align-items-center w-100">
-                      <div className="col font-weight-bold pl-3">Posted</div>
-                    </div>
-                  </div>
-                </div>
+        <Tabs
+          id="controlled-tab"
+          activeKey={key}
+          onSelect={(k) => setKey(k)}
+          >
+          <Tab eventKey="posted" title="Posted" id="tab" className="tab-pane">
+            <div className="col-md-12">
+              <div className="card mb-3" id="postsCard">
+                <DashboardCardHeader></DashboardCardHeader>  
                 <ListPostsUser posts={posted}></ListPostsUser>
               </div>
-              <div>
-                <div className="card mb-3">
-                  <div className="card-header pr-0 pl-0">
-                    <div className="row no-gutters align-items-center w-100">
-                      <div className="col font-weight-bold pl-3">
-                        Interested
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+          </Tab>
+          <Tab eventKey="interested" title="Interested" id="tab">
+            <div className="col-md-12">
+              <div className="card mb-3">
+                <DashboardCardHeader></DashboardCardHeader>  
                 <ListPostsUser posts={interested}></ListPostsUser>
               </div>
-              <div>
-                <div className="card mb-3">
-                  <div className="card-header pr-0 pl-0">
-                    <div className="row no-gutters align-items-center w-100">
-                      <div className="col font-weight-bold pl-3">TeamUped</div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+          </Tab>
+          <Tab eventKey="teamuped" title="Teamuped" id="tab">
+            <div className="col-md-12">
+              <div className="card mb-3">
+                <DashboardCardHeader></DashboardCardHeader>  
                 <ListPostsUser posts={teamuped}></ListPostsUser>
               </div>
             </div>
-          </div>
-        </div>
+          </Tab>
+        </Tabs> 
       </div>
     </div>
   );

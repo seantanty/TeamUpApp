@@ -13,8 +13,11 @@ const ListPostsUser = (props) => {
       let dateToShow = postDate.toLocaleString();
       res.push(
         <div className="forum-item active" key={"Posts" + i}>
-          <div className="card-body py-3">
+          <div className="card-body py-3" style={{height: "3.5rem"}}>
             <div className="row no-gutters align-items-center">
+              <div className="col-md-3">
+                <p>{p.category}</p>
+              </div>
               <div className="col">
                 <Link
                   to={{
@@ -24,9 +27,9 @@ const ListPostsUser = (props) => {
                   <p className="forum-item-title">{p.title}</p>
                 </Link>
               </div>
-              <div className="d-none d-md-block col-6">
+              <div className="d-none d-md-block col-4">
                 <div className="row no-gutters align-items-center">
-                  <div className="col-6">{dateToShow}</div>
+                  <div className="col-10">{dateToShow}</div>
                 </div>
               </div>
             </div>

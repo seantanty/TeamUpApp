@@ -1,6 +1,11 @@
 .color-nav,
+
+.navbar-brand {
+  /*color: */
+}
+
 .navbar-nav {
-  background-color: #f0ffff;
+  background-color: #fffff;
   height: 50px;
 }
 
@@ -9,7 +14,7 @@
   padding-top: 10px;
 }
 
-.navbar-toggler {
+.navbar-toggler, .nav-item {
   border-color: #808080;
   background-color: #ffffff;
   color: #808080;

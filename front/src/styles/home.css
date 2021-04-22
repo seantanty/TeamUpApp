@@ -7,20 +7,29 @@ body {
 
 #container {
   background-color: #ffffff;
-  padding-left: 160px;
   margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card {
+  
   box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
     0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
     0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  
   border-width: 1px solid #e8e8e8 ;
   border-radius: 4px;
   transition: all 0.2s;
   background-color: #ffffff;
 }
+
 
 #postsCard {
   background-color: #ffffff;
@@ -42,7 +51,8 @@ body {
 #searchBarBox {
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 85px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #searchInput {
@@ -59,5 +69,9 @@ body {
 }
 
 .Pagination {
-  margin-left: 135px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: auto;
+  margin-top: auto;
 }

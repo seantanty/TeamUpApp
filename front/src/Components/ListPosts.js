@@ -17,7 +17,7 @@ const ListPosts = (props) => {
       let dateToShow = postDate.toLocaleString();
       res.push(
         <div className="forum-item active" key={"Posts" + i}>
-          <div className="card-body py-3">
+          <div className="card-body py-3" style={{height: "3.5rem"}}>
             <div className="row no-gutters align-items-center">
               <div className="col-md-2">
                 <p>{p.category}</p>
