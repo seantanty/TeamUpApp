@@ -108,7 +108,9 @@ function IndividualPost(props) {
               ></TeamList>
               <br />
               <ListComments
+                post={post}
                 userid={curUserId}
+                username={curUsername}
                 comments={comments}
               ></ListComments>
             </div>

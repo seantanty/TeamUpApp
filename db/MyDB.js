@@ -3,7 +3,8 @@ const { MongoClient, ObjectId } = require("mongodb");
 function MyDB() {
   const myDB = {};
 
-  const url = "mongodb+srv://seantan:TanWeb5610Ge@cluster0.u90qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  const url =
+    "mongodb+srv://seantan:TanWeb5610Ge@cluster0.u90qt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
   //process.env.MONGODB_URI;
 
   const DB_NAME = "5610Project3";
@@ -28,7 +29,7 @@ function MyDB() {
               _id: p_id,
               title: post.title,
               createdAt: post.createdAt,
-              category: post.category
+              category: post.category,
             },
           },
         }
@@ -205,6 +206,54 @@ function MyDB() {
               username: username,
               content: comment.comment,
               createdAt: new Date(),
+            },
+          },
+        }
+      );
+      return res;
+    } finally {
+      client.close();
+    }
+  };
+
+  myDB.editComment = async (postId, commentId, comment) => {
+    let client;
+    try {
+      const c_id = new ObjectId(commentId);
+      const p_id = new ObjectId(postId);
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      //need to add a post backend verification
+      const res = await db.collection("posts").updateOne(
+        { _id: p_id, "comments._id": c_id },
+        {
+          $set: {
+            "comments.$.content": comment,
+          },
+        }
+      );
+      return res;
+    } finally {
+      client.close();
+    }
+  };
+
+  myDB.deleteComment = async (postId, commentId) => {
+    let client;
+    try {
+      const c_id = new ObjectId(commentId);
+      const p_id = new ObjectId(postId);
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      //need to add a post backend verification
+      const res = await db.collection("posts").updateOne(
+        { _id: p_id },
+        {
+          $pull: {
+            comments: {
+              _id: c_id,
             },
           },
         }

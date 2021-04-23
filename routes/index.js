@@ -122,9 +122,34 @@ router.post("/createComment", async (req, res) => {
   }
 });
 
+router.post("/editComment", async (req, res) => {
+  try {
+    console.log(req.body.comment);
+    const dbRes = await myDB.editComment(
+      req.body.postId,
+      req.body.commentId,
+      req.body.comment
+    );
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
 router.get("/getComments", async (req, res) => {
   try {
     const dbRes = await myDB.getComments(req.query);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/deleteComment", async (req, res) => {
+  try {
+    const dbRes = await myDB.deleteComment(req.body.postId, req.body.commentId);
     res.send(dbRes);
   } catch (e) {
     console.log("Error", e);
@@ -177,7 +202,7 @@ router.post("/register", async (req, res) => {
 
     if (dbRes == null) {
       console.log("error!!!");
-      res.send({userid: null});
+      res.send({ userid: null });
       //res.redirect("/register");
     } else {
       passport.authenticate("local")(req, res, function () {

@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../styles/listcomments.css";
+import CommentBox from "../Components/CommentBox.js";
 
 const ListComments = (props) => {
-  const { comments, userid } = props;
+  const { post, comments, userid, username } = props;
+  const [displayCommentBox, setdisplayCommentBox] = useState(false);
+
+  function clickComment() {
+    if (userid) {
+      setdisplayCommentBox(!displayCommentBox);
+    }
+  }
+
+  const deleteComment = async (cid) => {
+    await fetch("/deleteComment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId: post._id,
+        commentId: cid,
+      }),
+    }).then(() => {
+      window.location.reload();
+    });
+  };
 
   if (comments !== null && comments !== undefined) {
     if (comments.length && comments.length > 0) {
@@ -29,6 +52,7 @@ const ListComments = (props) => {
                     marginLeft: "10px",
                     height: "36px",
                   }}
+                  onClick={(e) => clickComment()}
                 >
                   Edit
                 </button>
@@ -39,9 +63,16 @@ const ListComments = (props) => {
                     marginLeft: "10px",
                     height: "36px",
                   }}
+                  onClick={(e) => deleteComment(c._id)}
                 >
                   Delete
                 </button>
+                <CommentBox
+                  username={username}
+                  display={displayCommentBox}
+                  post={post}
+                  cid={c._id}
+                ></CommentBox>
               </div>
             );
           } else {
