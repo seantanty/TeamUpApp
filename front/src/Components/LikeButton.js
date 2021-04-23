@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import "../styles/likebutton.css";
-
 const LikeButton = (props) => {
   const { post } = props;
   const [like, setLike] = useState(false);
@@ -58,7 +56,6 @@ const LikeButton = (props) => {
         <button
           type="button"
           className="btn btn-outline-danger"
-          id="likebtn"
           onClick={likePost}
         >
           <i className="fa fa-heart-o"></i>

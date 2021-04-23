@@ -13,7 +13,9 @@ function IndividualPost(props) {
   const curUsername = JSON.parse(localStorage.getItem("user")).username;
 
   function clickComment() {
-    setdisplayCommentBox(!displayCommentBox);
+    if (curUsername) {
+      setdisplayCommentBox(!displayCommentBox);
+    }
   }
 
   function convertDate(dateString) {
@@ -47,7 +49,7 @@ function IndividualPost(props) {
         className="container mt-5 bg-white"
         style={{
           border: "1px solid #e8e8e8",
-          width: "800px"
+          width: "800px",
         }}
       >
         <div className="d-flex justify-content-center row">
@@ -76,7 +78,7 @@ function IndividualPost(props) {
                   <LikeButton post={post}></LikeButton>
                   <button
                     type="button"
-                    className="btn btn-outline-primary"
+                    className="btn btn-primary"
                     style={{
                       marginLeft: "10px",
                       color: "#ffffff",
@@ -94,14 +96,21 @@ function IndividualPost(props) {
                   ></TeamUpComponent>
                 </div>
               </div>
-              <CommentBox display={displayCommentBox} post={post}></CommentBox>
+              <CommentBox
+                username={curUsername}
+                display={displayCommentBox}
+                post={post}
+              ></CommentBox>
               <br /> <br />
               <TeamList
                 username={curUsername}
                 teamMembers={post.groupMember}
               ></TeamList>
               <br />
-              <ListComments comments={comments}></ListComments>
+              <ListComments
+                userid={curUserId}
+                comments={comments}
+              ></ListComments>
             </div>
           </div>
         </div>

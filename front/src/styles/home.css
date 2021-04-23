@@ -18,18 +18,16 @@ body {
 }
 
 .card {
-  
   box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
     0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
     0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
-  
-  border-width: 1px solid #e8e8e8 ;
+
+  border-width: 1px solid #e8e8e8;
   border-radius: 4px;
   transition: all 0.2s;
   background-color: #ffffff;
 }
-
 
 #postsCard {
   background-color: #ffffff;
@@ -60,11 +58,11 @@ body {
   border-right: none;
 }
 
-.btn {
+#searchButton {
   background-color: #1e90ff;
 }
 
-.btn:hover {
+#searchButton:hover {
   background-color: #4169e1;
 }
 

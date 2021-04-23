@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "../styles/commentbox.css";
 
 const CommentBox = (props) => {
-  const { post, display } = props;
+  const { username, post, display } = props;
   const [comment, setComment] = useState([]);
-  if (display) {
+  if (display && username) {
     const createComment = async () => {
       await fetch("/createComment", {
         method: "POST",
@@ -23,6 +23,7 @@ const CommentBox = (props) => {
     return (
       <div className="CommentBox">
         <div className="bg-light p-2">
+          <h5>Post comment as {username}</h5>
           <div className="d-flex flex-row align-items-start">
             <textarea
               className="col-md-6 form-control ml-1 textarea"

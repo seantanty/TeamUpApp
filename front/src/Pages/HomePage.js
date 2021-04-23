@@ -73,6 +73,7 @@ function HomePage() {
             />
             <span className="input-group-btn">
               <button
+                id="searchButton"
                 className="btn btn-success"
                 type="submit"
                 onClick={() => {
