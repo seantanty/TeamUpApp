@@ -52,7 +52,7 @@ const TeamUpComponent = (props) => {
   }
 
   if (userid === post.userId) {
-    if (post.open) {
+    if (post.open || post.groupMember.length === 0) {
       return (
         <div>
           <button
@@ -111,8 +111,12 @@ const TeamUpComponent = (props) => {
       );
     } else {
       return (
-        <button type="button" className="btn btn-secondary" 
-          disabled style={{marginLeft: "10px"}}>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          disabled
+          style={{ marginLeft: "10px" }}
+        >
           Team created
         </button>
       );

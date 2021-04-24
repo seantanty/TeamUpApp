@@ -4,6 +4,7 @@ import CommentBox from "../Components/CommentBox.js";
 import LikeButton from "../Components/LikeButton.js";
 import TeamUpComponent from "../Components/TeamUpComponent.js";
 import TeamList from "../Components/TeamList.js";
+import EditAndCloseButton from "../Components/EditAndCloseButton.js";
 
 function IndividualPost(props) {
   const [post, setPost] = useState([]);
@@ -89,6 +90,10 @@ function IndividualPost(props) {
                     <i className="fa fa-commenting-o"></i>
                     <span className="ml-1">Comment</span>
                   </button>
+                  <EditAndCloseButton
+                    userid={curUserId}
+                    post={post}
+                  ></EditAndCloseButton>
                   <br /> <br />
                   <TeamUpComponent
                     userid={curUserId}
