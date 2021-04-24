@@ -41,7 +41,7 @@ const CreatePostPage = () => {
 
   return (
     <div className="container" id="postContainer">
-      <h1>{cat}</h1>
+      <h3>Create Post</h3>
       <div className="row">
         <div className="col-md-8 col-md-offset-2">
           <form action="">

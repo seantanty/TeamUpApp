@@ -40,6 +40,27 @@ function MyDB() {
     }
   };
 
+  myDB.editPost = async (postId, content) => {
+    let client;
+    try {
+      client = new MongoClient(url, { useUnifiedTopology: true });
+      await client.connect();
+      const db = client.db(DB_NAME);
+      const p_id = new ObjectId(postId);
+      const res = await db.collection("posts").updateOne(
+        { _id: p_id },
+        {
+          $set: {
+            content: content,
+            lastUpdated: new Date(),
+          },
+        }
+      );
+      return { res, p_id };
+    } finally {
+      client.close();
+    }
+  };
 
   myDB.getPosts = async (query) => {
     let client;
