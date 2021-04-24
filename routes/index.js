@@ -40,6 +40,34 @@ router.post("/createPost", async (req, res) => {
   }
 });
 
+router.post("/editPost", async (req, res) => {
+  try {
+    const postObj = {
+      userId: req.user._id,
+      username: req.user.username,
+      title: req.body.title,
+      category: req.body.category,
+      content: req.body.content,
+      lastUpdated: new Date(),
+    };
+    const dbRes = await myDB.editPost(postObj);
+    res.send({ p_id: dbRes.p_id });
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
+router.post("/closePost", async (req, res) => {
+  try {
+    const dbRes = await myDB.closePost(req.body.postId);
+    res.send(dbRes);
+  } catch (e) {
+    console.log("Error", e);
+    res.status(400).send({ err: e });
+  }
+});
+
 router.post("/getPosts", async (req, res) => {
   try {
     console.log(req.body);

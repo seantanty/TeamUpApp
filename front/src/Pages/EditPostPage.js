@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/post.css";
 
-const CreatePostPage = () => {
+const EditPostPage = () => {
+  const [post, setPost] = useState([]);
   const [title, setTitle] = useState("");
   const [cat, setCat] = useState("");
   const [content, setContent] = useState("");
+  const postId = window.location.pathname.slice(10);
 
   const user = localStorage.getItem("user");
   if (user === null) {
@@ -13,12 +15,32 @@ const CreatePostPage = () => {
     window.location.href = "/login";
   }
 
-  const createPost = async (event) => {
+  useEffect(() => {
+    const getPostById = async () => {
+      try {
+        const resRaw = await fetch("/getPostById", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: postId }),
+        });
+        const res = await resRaw.json();
+        setPost(res);
+        setCat(res.category);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getPostById();
+  }, []);
+
+  const editPost = async (event) => {
     event.preventDefault();
     if (title === "" || cat === "") {
       alert("Post must have a title and category.");
     } else {
-      const resRaw = await fetch("/createPost", {
+      const resRaw = await fetch("/editPost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,15 +73,14 @@ const CreatePostPage = () => {
               <input
                 type="text"
                 className="form-control"
-                id="title"
                 name="title"
+                value={post.title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className="form-group">
               <select
                 className="form-select form-control"
-                id="category"
                 value={cat}
                 name="category"
                 onChange={(evt) => {
@@ -79,8 +100,8 @@ const CreatePostPage = () => {
               <textarea
                 rows="5"
                 className="form-control"
-                id="description"
                 name="description"
+                value={post.content}
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>
             </div>
@@ -94,14 +115,14 @@ const CreatePostPage = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onClick={createPost}
-                id="createPost"
+                onClick={editPost}
+                id="editPost"
               >
-                Create
+                Edit
               </button>
               <Link
                 to={{
-                  pathname: `/`,
+                  pathname: `/post/${postId}`,
                 }}
               >
                 <button className="btn btn-default" id="cancel">
@@ -116,4 +137,4 @@ const CreatePostPage = () => {
   );
 };
 
-export default CreatePostPage;
+export default EditPostPage;
