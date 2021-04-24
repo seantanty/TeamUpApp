@@ -40,35 +40,6 @@ function MyDB() {
     }
   };
 
-  myDB.createPost = async (post) => {
-    let client;
-    try {
-      client = new MongoClient(url, { useUnifiedTopology: true });
-      await client.connect();
-      const db = client.db(DB_NAME);
-      const postsCol = db.collection("posts");
-      const u_id = new ObjectId(post.userId);
-
-      const res1 = await postsCol.insertOne(post);
-      const p_id = new ObjectId(res1.ops[0]._id);
-      const res2 = await db.collection("Users").updateOne(
-        { _id: u_id },
-        {
-          $push: {
-            posted: {
-              _id: p_id,
-              title: post.title,
-              createdAt: post.createdAt,
-              category: post.category,
-            },
-          },
-        }
-      );
-      return { res1, res2, p_id };
-    } finally {
-      client.close();
-    }
-  };
 
   myDB.getPosts = async (query) => {
     let client;
@@ -158,6 +129,7 @@ function MyDB() {
               _id: p_id,
               title: post.title,
               createdAt: new Date(),
+              category: post.category,
             },
           },
         }
@@ -228,6 +200,7 @@ function MyDB() {
               _id: p_id,
               title: post.title,
               createdAt: post.createdAt,
+              category: post.category,
             },
           },
         }
