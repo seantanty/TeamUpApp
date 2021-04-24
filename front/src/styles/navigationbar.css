@@ -1,19 +1,14 @@
-.color-nav,
-
-.navbar-brand {
-}
-
-.navbar-nav {
-  background-color: #fffff;
-  height: 50px;
-}
-
 .nav-link {
   color: #808080;
   padding-top: 10px;
 }
 
-.navbar-toggler, .nav-item {
+a.nav-link:hover {
+    color: #C74009;
+}
+
+.navbar-toggler,
+.nav-item {
   border-color: #808080;
   background-color: #ffffff;
   color: #808080;
