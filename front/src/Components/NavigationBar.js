@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "../styles/navigationbar.css";
-import icon from "../styles/teamup32.png";
+import icon from "../styles/logo60.png";
 //import write from "../styles/write.png";
 
 const NavigationBar = () => {
@@ -14,7 +14,6 @@ const NavigationBar = () => {
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img id="icon" src={icon} alt="icon" />
-          teamup 
         </Link>
         <button
           className="navbar-toggler"

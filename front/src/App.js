@@ -8,38 +8,41 @@ import Header from "./Components/Header.js";
 import CreatePostPage from "./Pages/CreatePostPage.js";
 import DashboardPage from "./Pages/DashboardPage.js";
 import IndividualPost from "./Components/IndividualPost.js";
+import "./index.css";
 
 function App() {
   return (
-    <Router>
-      <Header></Header>
+    
+      <Router>
+        <Header></Header>
 
-      <Switch>
-        <Route path="/login">
-          <LoginPage></LoginPage>
-        </Route>
+        <Switch>
+          <Route path="/login">
+            <LoginPage></LoginPage>
+          </Route>
 
-        <Route path="/register">
-          <RegisterPage></RegisterPage>
-        </Route>
+          <Route path="/register">
+            <RegisterPage></RegisterPage>
+          </Route>
 
-        <Route path="/" exact>
-          <HomePage></HomePage>
-        </Route>
+          <Route path="/" exact>
+            <HomePage></HomePage>
+          </Route>
 
-        <Route path="/createPost">
-          <CreatePostPage></CreatePostPage>
-        </Route>
+          <Route path="/createPost">
+            <CreatePostPage></CreatePostPage>
+          </Route>
 
-        <Route path="/dashboard">
-          <DashboardPage></DashboardPage>
-        </Route>
+          <Route path="/dashboard">
+            <DashboardPage></DashboardPage>
+          </Route>
 
-        <Route path="/post/:id">
-          <IndividualPost></IndividualPost>
-        </Route>
-      </Switch>
-    </Router>
+          <Route path="/post/:id">
+            <IndividualPost></IndividualPost>
+          </Route>
+        </Switch>
+      </Router>
+   
   );
 }
 

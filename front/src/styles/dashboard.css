@@ -1,8 +1,11 @@
 .containter {
   margin-top: 20px;
   position: relative;
-  background-color: #ffffff;
-  text-align: left;
+  border: 1px solid #e8e8e8;
+  width: 1000px;
+  background-color: #e8e8e8;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .countsContainer {
@@ -12,7 +15,8 @@
   margin-right: auto;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  align-items: center;
+  /*flex-wrap: wrap;*/
 }
 
 .tab-pane {
@@ -21,12 +25,14 @@
     border-bottom: 1px solid #e8e8e8;
     border-radius: 0px 0px 4px 4px;
     padding: 10px;
+
 }
 
 .container-fluid {
   margin-left: auto;
   margin-right: auto;
   width: 1000px;
+  /*background-color: #c0c0c0;*/
 }
 
 .card {
@@ -37,14 +43,13 @@
   transition: all 0.2s;
   border-width: 0;
   border-radius: 4px;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
 }
 
 
 .card-header {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
   border-bottom-width: 1px;
   border-bottom: 1px solid rgba(26, 54, 126, 0.125);
   border-radius: 4px;
@@ -52,6 +57,6 @@
   padding-bottom: 0;
   padding-right: 0.625rem;
   height: 3.5rem;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
 }
 

@@ -54,6 +54,7 @@ const CreatePostPage = () => {
               <input
                 type="text"
                 className="form-control"
+                id="title"
                 name="title"
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -61,6 +62,7 @@ const CreatePostPage = () => {
             <div className="form-group">
               <select
                 className="form-select form-control"
+                id="category"
                 value={cat}
                 name="category"
                 onChange={(evt) => {
@@ -80,6 +82,7 @@ const CreatePostPage = () => {
               <textarea
                 rows="5"
                 className="form-control"
+                id="description"
                 name="description"
                 onChange={(e) => setContent(e.target.value)}
               ></textarea>

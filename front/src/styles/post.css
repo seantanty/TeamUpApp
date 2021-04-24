@@ -1,7 +1,17 @@
+#postContainer {
+  margin-top: 40px;
+  border: 1px solid #e8e8e8;
+  background-color: #e8e8e8;
+  width: 800px;
+}
+
 .form-group {
   margin-top: 30px;
-  margin-left: 175px;
-  background-color: #ffffff;
+  margin-left: 125px;
+}
+
+#title, #category, #description {
+  width: 500px;
 }
 
 .require {
