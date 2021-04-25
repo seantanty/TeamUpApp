@@ -8,8 +8,8 @@ import Header from "./Components/Header.js";
 import CreatePostPage from "./Pages/CreatePostPage.js";
 import DashboardPage from "./Pages/DashboardPage.js";
 import IndividualPost from "./Components/IndividualPost.js";
-import "./index.css";
 import EditPostPage from "./Pages/EditPostPage.js";
+import "./index.css";
 
 function App() {
   return (

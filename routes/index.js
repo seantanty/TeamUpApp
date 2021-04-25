@@ -42,15 +42,7 @@ router.post("/createPost", async (req, res) => {
 
 router.post("/editPost", async (req, res) => {
   try {
-    const postObj = {
-      userId: req.user._id,
-      username: req.user.username,
-      title: req.body.title,
-      category: req.body.category,
-      content: req.body.content,
-      lastUpdated: new Date(),
-    };
-    const dbRes = await myDB.editPost(postObj);
+    const dbRes = await myDB.editPost(req.body.postId, req.body.content);
     res.send({ p_id: dbRes.p_id });
   } catch (e) {
     console.log("Error", e);
