@@ -73,11 +73,11 @@ const DashboardPage = () => {
 
       <div className="container-fluid mt-100">
         <Tabs
-          id="controlled-tab"
+          className="tab-pane"
           activeKey={key}
           onSelect={(k) => setKey(k)}
           >
-          <Tab eventKey="posted" title="Posted" id="tab" className="tab-pane">
+          <Tab eventKey="posted" title="Posted" id="tab">
             <div className="col-md-12">
               <div className="card mb-3" id="postsCard">
                 <DashboardCardHeader></DashboardCardHeader>  

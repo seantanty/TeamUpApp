@@ -39,6 +39,7 @@ const EditAndCloseButton = (props) => {
           <button
             type="button"
             className="btn btn-outline-danger"
+            id="closeButton"
             data-bs-toggle="modal"
             data-bs-target="#closePostModal"
           >

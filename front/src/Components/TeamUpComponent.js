@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/teamupcomponent.css"
 
 const TeamUpComponent = (props) => {
   const { post, userid } = props;
@@ -58,6 +59,7 @@ const TeamUpComponent = (props) => {
           <button
             type="button"
             className="btn btn-primary"
+            id="teamupButton"
             data-bs-toggle="modal"
             data-bs-target="#createTeamModal"
           >
@@ -99,6 +101,7 @@ const TeamUpComponent = (props) => {
                   <button
                     type="button"
                     className="btn btn-primary"
+                    id="createteamButton"
                     onClick={createTeam}
                   >
                     Create Team
