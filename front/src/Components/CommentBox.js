@@ -48,7 +48,7 @@ const CommentBox = (props) => {
                 style={{ resize: "none" }}
               ></textarea>
             </div>
-            <div className="mt-2 pull-right">
+            <div className="mt-2">
               <button
                 className="btn btn-primary btn-sm"
                 id="editComment"

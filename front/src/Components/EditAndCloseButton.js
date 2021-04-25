@@ -82,8 +82,8 @@ const EditAndCloseButton = (props) => {
                   </button>
                   <button
                     type="button"
-                    id
                     className="btn btn-primary"
+                    id="closePostButton"
                     onClick={closePost}
                   >
                     Close Post

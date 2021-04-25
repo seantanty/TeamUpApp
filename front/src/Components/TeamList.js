@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "../styles/teamlist.css";
 
 const TeamList = (props) => {
@@ -46,10 +45,6 @@ const TeamList = (props) => {
   } else {
     return <div></div>;
   }
-};
-
-TeamList.propTypes = {
-  teamMembers: PropTypes.array.isRequired,
 };
 
 export default TeamList;
