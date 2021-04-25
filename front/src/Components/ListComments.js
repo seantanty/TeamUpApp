@@ -23,6 +23,7 @@ const ListComments = (props) => {
                   <p>{c.content}</p>
                 </div>
               </div>
+              <br />
               <CommentEditAndDeleteButton
                 post={post}
                 userid={userid}
