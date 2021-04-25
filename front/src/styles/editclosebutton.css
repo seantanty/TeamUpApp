@@ -1,0 +1,15 @@
+#editButton {
+  margin-left: 10px;
+  color: #FA500C;
+  border: solid 1px #FA500C;
+  background-color: #ffffff;
+  width: 70px;
+}
+
+#editButton:hover {
+  color: #C74009;
+  border: solid 1px #C74009;
+  background-color: #ffffff;
+}
+
+

@@ -24,7 +24,7 @@ const TeamList = (props) => {
         return (
           <div className="card">
             <div className="card-body">
-              <h6 class="card-title">Team Members</h6>
+              <h5 class="card-title">Team Members</h5>
               <div className="card-body">
                 <ol className="list-group list-group-numbered TeamList">
                   {renderTeamMembers()}

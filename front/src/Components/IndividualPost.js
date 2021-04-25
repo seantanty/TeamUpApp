@@ -5,6 +5,9 @@ import LikeButton from "../Components/LikeButton.js";
 import TeamUpComponent from "../Components/TeamUpComponent.js";
 import TeamList from "../Components/TeamList.js";
 import EditAndCloseButton from "../Components/EditAndCloseButton.js";
+import "../styles/individualpost.css";
+import "../styles/editclosebutton.css";
+
 
 function IndividualPost(props) {
   const [post, setPost] = useState([]);
@@ -46,13 +49,7 @@ function IndividualPost(props) {
 
   return (
     <div>
-      <div
-        className="container mt-5 bg-white"
-        style={{
-          border: "1px solid #e8e8e8",
-          width: "800px",
-        }}
-      >
+      <div className="container mt-5 bg-white" id="individualpost">
         <div className="d-flex justify-content-center row">
           <div className="col-md-10">
             <div className="d-flex flex-column comment-section">
@@ -80,16 +77,13 @@ function IndividualPost(props) {
                   <button
                     type="button"
                     className="btn btn-primary"
-                    style={{
-                      marginLeft: "10px",
-                      color: "#ffffff",
-                      height: "36px",
-                    }}
+                    id="comment"
                     onClick={clickComment}
                   >
                     <i className="fa fa-commenting-o"></i>
                     <span className="ml-1">Comment</span>
                   </button>
+                  <br />
                   <EditAndCloseButton
                     userid={curUserId}
                     post={post}
@@ -106,7 +100,7 @@ function IndividualPost(props) {
                 display={displayCommentBox}
                 post={post}
               ></CommentBox>
-              <br /> <br />
+              <br />
               <TeamList
                 username={curUsername}
                 teamMembers={post.groupMember}

@@ -1,12 +1,4 @@
-body {
-  margin: 0;
-  line-height: 1.5;
-  color: #495057;
-  text-align: left;
-}
-
 #container {
-  background-color: ##808080;
   margin-top: 25px;
   margin-left: auto;
   margin-right: auto;

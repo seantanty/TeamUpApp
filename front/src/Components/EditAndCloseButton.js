@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import "../styles/editclosebutton.css";
 
 const EditAndCloseButton = (props) => {
   const { post, userid } = props;
@@ -27,7 +28,11 @@ const EditAndCloseButton = (props) => {
               pathname: `/editPost/${post._id}`,
             }}
           >
-            <button type="button" className="btn btn-outline-warning">
+            <button
+              type="button"
+              className="btn btn-outline-warning"
+              id="editButton"
+            >
               Edit
             </button>
           </Link>
@@ -76,6 +81,7 @@ const EditAndCloseButton = (props) => {
                   </button>
                   <button
                     type="button"
+                    id
                     className="btn btn-primary"
                     onClick={closePost}
                   >

@@ -7,3 +7,12 @@ body {
   text-align: left;
 }
 
+/**
+ * color variables
+ */
+@value primaryColor: #FA500C;
+@value secondaryColor: #C74009;
+@value borderColor: #e8e8e8;
+@value backShade: #e8e8e8;
+
+

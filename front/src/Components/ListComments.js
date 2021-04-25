@@ -41,17 +41,15 @@ const ListComments = (props) => {
               <div className="comment-item active" key={"Comments" + i}>
                 <div className="comment mt-4 text-justify float-left">
                   <div className="comment card p-3 mt-2">
-                    <h5>{c.username}</h5> <span>{dateToShow}</span> <br />
+                    <h6>{c.username}</h6> <span>{dateToShow}</span> <br />
                     <p>{c.content}</p>
                   </div>
                 </div>
+                <br />
                 <button
                   type="button"
                   className="btn btn-warning"
-                  style={{
-                    marginLeft: "10px",
-                    height: "36px",
-                  }}
+                  id="commentEdit"
                   onClick={(e) => clickComment()}
                 >
                   Edit
@@ -59,10 +57,7 @@ const ListComments = (props) => {
                 <button
                   type="button"
                   className="btn btn-danger"
-                  style={{
-                    marginLeft: "10px",
-                    height: "36px",
-                  }}
+                  id="commentDelete"
                   onClick={(e) => deleteComment(c._id)}
                 >
                   Delete
@@ -80,7 +75,7 @@ const ListComments = (props) => {
               <div className="comment-item active" key={"Comments" + i}>
                 <div className="comment mt-4 text-justify float-left">
                   <div className="comment card p-3 mt-2">
-                    <h5>{c.username}</h5> <span>{dateToShow}</span> <br />
+                    <h6>{c.username}</h6> <span>{dateToShow}</span> <br />
                     <p>{c.content}</p>
                   </div>
                 </div>

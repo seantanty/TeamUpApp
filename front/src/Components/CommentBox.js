@@ -40,7 +40,7 @@ const CommentBox = (props) => {
       return (
         <div className="CommentBox">
           <div className="bg-light p-2">
-            <h5>Edit comment as {username}</h5>
+            <h6>Edit comment as {username}</h6>
             <div className="d-flex flex-row align-items-start">
               <textarea
                 className="col-md-6 form-control ml-1 textarea"
@@ -51,6 +51,7 @@ const CommentBox = (props) => {
             <div className="mt-2 pull-right">
               <button
                 className="btn btn-primary btn-sm"
+                id="editComment"
                 type="button"
                 onClick={editComment}
               >
@@ -64,7 +65,7 @@ const CommentBox = (props) => {
       return (
         <div className="CommentBox">
           <div className="bg-light p-2">
-            <h5>Post comment as {username}</h5>
+            <h6>Post comment as {username}</h6>
             <div className="d-flex flex-row align-items-start">
               <textarea
                 className="col-md-6 form-control ml-1 textarea"
@@ -75,6 +76,7 @@ const CommentBox = (props) => {
             <div className="mt-2 pull-right">
               <button
                 className="btn btn-primary btn-sm"
+                id="postComment"
                 type="button"
                 onClick={createComment}
               >
